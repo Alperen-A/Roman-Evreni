@@ -1,12 +1,36 @@
-﻿using Roman_Evreni; 
+﻿using Roman_Evreni;
 
-// 1. Karakteri tanımla
-Karakter Baskarakter = new Karakter("Alperen", "Savaşçı", 21, "Kuzeyden gelen kod yazarı.");
-Baskarakter.Bilgiyazdir();
+// --- Karakter Listesi ---
+// Yeni bir karakter listesi oluşturuyoruz
+List<Karakter> Karakterler = new List<Karakter>();
 
-// 2. Karakteri tanımla
-Karakter Yankarakter = new Karakter("Melisa", "Büyücü", 20, "Kadim dillerin uzmanı.");
-Yankarakter.Bilgiyazdir();
+// Listeye karakter ekleme
+Karakterler.Add(new Karakter("Alperen", "Savaşçı", 21, "Kuzeyden gelen kod yazarı."));
+Karakterler.Add(new Karakter("Melisa", "Büyücü", 20, "Kadim dillerin uzmanı."));
+Karakterler.Add(new Karakter("Gölge", "Casus", 35, "Kraliyet sarayının gizli kulagi."));
 
-// Konsol hemen kapanmasın diye bekle
+// --- Mekan Listesi ---
+List<Mekan> Mekanlar = new List<Mekan>();
+
+// Listeye mekan ekleme
+Mekanlar.Add(new Mekan("Karanlık Orman", "Orman", "Efsaneye göre giren geri dönemez."));
+Mekanlar.Add(new Mekan("Ejderha Kalesi", "Kale", "300 yıldır yıkılmayan surlar."));
+
+// --- Ekrana Yazdırma ---
+Console.WriteLine("=== ROMAN EVRENİ RAPORU ===\n");
+
+Console.WriteLine("--- KARAKTERLER ---");
+// Döngü ile listedeki herkesi tek tek yazdır
+foreach (var K in Karakterler)
+{
+    K.Bilgiyazdir();
+}
+
+Console.WriteLine("\n--- MEKANLAR ---");
+foreach (var M in Mekanlar)
+{
+    M.Bilgiyazdir();
+}
+
+// Program kapanmasın
 Console.ReadLine();
