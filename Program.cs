@@ -32,5 +32,9 @@ foreach (var M in Mekanlar)
     M.Bilgiyazdir();
 }
 
+// --- OLAYLAR ---
+Olay savas = new Olay("Büyük Savaş", "1250", "Kuzey Krallığı kazandı.");
+savas.Bilgiyazdir();
+
 // Program kapanmasın
 Console.ReadLine();
