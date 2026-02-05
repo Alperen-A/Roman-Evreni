@@ -1,5 +1,5 @@
 ﻿using Roman_Evreni;
-
+using System.IO;  // Dosya işlemleri için gerekli kütüphane
 // --- Karakter Listesi ---
 // Yeni bir karakter listesi oluşturuyoruz
 List<Karakter> Karakterler = new List<Karakter>();
@@ -35,6 +35,25 @@ foreach (var M in Mekanlar)
 // --- OLAYLAR ---
 Olay savas = new Olay("Büyük Savaş", "1250", "Kuzey Krallığı kazandı.");
 savas.Bilgiyazdir();
+
+
+// --- DOSYAYA KAYIT ---
+Console.WriteLine("\n--- KAYIT İŞLEMİ ---");
+
+// Kaydedilecek satırları hazırlayalım
+List<string> satirlar = new List<string>();
+satirlar.Add($"Rapor Tarihi: {DateTime.Now}");
+satirlar.Add("-----------------------------");
+
+// Karakterleri listeye ekle
+foreach (var k in Karakterler)
+{
+    satirlar.Add($"Karakter: {k.Ad} ({k.Rol})");
+}
+
+// Dosyayı oluştur ve yaz
+File.WriteAllLines("Evren_Kayitlari.txt", satirlar);
+Console.WriteLine("Veriler 'Evren_Kayitlari.txt' dosyasına başarıyla kaydedildi!");
 
 // Program kapanmasın
 Console.ReadLine();
