@@ -1,5 +1,23 @@
 ﻿using Roman_Evreni;
 using System.IO;  // Dosya işlemleri için gerekli kütüphane
+
+// --- GEÇMİŞİ YÜKLE (LOAD GAME) ---
+Console.WriteLine("--- GEÇMİŞ KAYITLAR KONTROL EDİLİYOR ---");
+
+if (File.Exists("Evren_Kayitlari.txt"))
+{
+    string[] eskiSatirlar = File.ReadAllLines("Evren_Kayitlari.txt");
+    foreach (string satir in eskiSatirlar)
+    {
+        Console.WriteLine(satir);
+    }
+    Console.WriteLine("--- GEÇMİŞ BAŞARIYLA YÜKLENDİ ---\n");
+}
+else
+{
+    Console.WriteLine("Henüz kaydedilmiş bir evren yok.\n");
+}
+
 // --- Karakter Listesi ---
 // Yeni bir karakter listesi oluşturuyoruz
 List<Karakter> Karakterler = new List<Karakter>();
