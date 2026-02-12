@@ -55,6 +55,31 @@ Olay savas = new Olay("Büyük Savaş", "1250", "Kuzey Krallığı kazandı.");
 savas.Bilgiyazdir();
 
 
+// --- MENÜ SİSTEMİ BAŞLANGICI ---
+while (true) // Sonsuz döngü: Sen 'break' diyene kadar dönmeye devam eder.
+{
+    Console.WriteLine("\n=============================");
+    Console.WriteLine("       ROMAN EVRENİ v1.0      ");
+    Console.WriteLine("=============================");
+    Console.WriteLine("1. Yeni Karakter Ekle");
+    Console.WriteLine("2. Mevcut Karakterleri Listele");
+    Console.WriteLine("3. Kaydet ve Çıkış");
+    Console.Write("Seçiminiz (1/2/3): ");
+    
+   string secim = Console.ReadLine() ?? "";
+
+    if (secim == "3")
+    {
+        Console.WriteLine("Çıkış yapılıyor...");
+        break; // Döngüyü kırar ve aşağıdaki Kayıt kodlarına gider.
+    }
+    else
+    {
+        Console.WriteLine("Bu özellik yapım aşamasında! (Yarın yapacağız)");
+    }
+}
+
+
 // --- DOSYAYA KAYIT ---
 Console.WriteLine("\n--- KAYIT İŞLEMİ ---");
 
@@ -73,5 +98,3 @@ foreach (var k in Karakterler)
 File.WriteAllLines("Evren_Kayitlari.txt", satirlar);
 Console.WriteLine("Veriler 'Evren_Kayitlari.txt' dosyasına başarıyla kaydedildi!");
 
-// Program kapanmasın
-Console.ReadLine();
