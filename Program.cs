@@ -23,9 +23,9 @@ else
 List<Karakter> Karakterler = new List<Karakter>();
 
 // Listeye karakter ekleme
-Karakterler.Add(new Karakter("Alperen", "Savaşçı", 21, "Kuzeyden gelen kod yazarı."));
-Karakterler.Add(new Karakter("Melisa", "Büyücü", 20, "Kadim dillerin uzmanı."));
-Karakterler.Add(new Karakter("Gölge", "Casus", 35, "Kraliyet sarayının gizli kulagi."));
+Karakterler.Add(new Karakter("Alperen", "Savaşçı", "Kuzeyden gelen kod yazarı."));
+Karakterler.Add(new Karakter("Melisa", "Büyücü",  "Kadim dillerin uzmanı."));
+Karakterler.Add(new Karakter("Gölge", "Casus",  "Kraliyet sarayının gizli kulagi."));
 
 // --- Mekan Listesi ---
 List<Mekan> Mekanlar = new List<Mekan>();
@@ -75,7 +75,18 @@ while (true) // Sonsuz döngü: Sen 'break' diyene kadar dönmeye devam eder.
     }
     else
     {
-        Console.WriteLine("Bu özellik yapım aşamasında! (Yarın yapacağız)");
+        Console.Write("Karakterin Adı: ");
+    string isim = Console.ReadLine() ?? "İsimsiz"; // Boş geçerse 'İsimsiz' olsun
+
+    Console.Write("Karakterin Rolü (Savaşçı, Büyücü vb.): ");
+    string rol = Console.ReadLine() ?? "Köylü";
+
+    // Yeni karakteri oluşturup listeye ekleyelim
+    // (Not: Can değerini şimdilik 100 olarak sabit veriyoruz)
+    Karakter yeniK = new Karakter(isim, rol, "henuz hikayesi yok.");
+    Karakterler.Add(yeniK);
+
+    Console.WriteLine($"\n--> {isim} isimli {rol} başarıyla oluşturuldu!");
     }
 }
 
