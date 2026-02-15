@@ -6,7 +6,7 @@ public class Karakter
     public string Rol { get; set; }
     public string Hikaye { get; set; }
 
-    // Kurucu metod (Sayı yok, sadece 3 bilgi)
+    // Kurucu metod: Sadece 3 bilgi istiyoruz (Sayı yok!)
     public Karakter(string ad, string rol, string hikaye)
     {
         Ad = ad;
@@ -14,7 +14,7 @@ public class Karakter
         Hikaye = hikaye;
     }
 
-    // İŞTE EKSİK OLAN KISIM BURASIYDI:
+    // Ekrana yazdırma özelliği
     public void Bilgiyazdir()
     {
         Console.WriteLine($"Karakter: {Ad} - {Rol}");

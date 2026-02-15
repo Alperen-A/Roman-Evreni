@@ -15,9 +15,8 @@ public class Olay
 
     public void Bilgiyazdir()
     {
-        Console.WriteLine($"*** {Ad} ***");
-        Console.WriteLine($"Tarih: {Tarih}");
+        Console.WriteLine($"Olay: {Ad} - Tarih: {Tarih}");
         Console.WriteLine($"Sonuç: {Sonuc}");
-        Console.WriteLine("*********************************");
+        Console.WriteLine("-------------------------");
     }
 }
