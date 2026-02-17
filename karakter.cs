@@ -3,22 +3,22 @@ namespace Roman_Evreni;
 public class Karakter
 {
     public string Ad { get; set; }
-    public string Rol { get; set; }
-    public string Hikaye { get; set; }
+    public string Gorunum { get; set; } // YENİ: Fiziksel özellikler
+    public string Hikaye { get; set; }  // YENİ: Uzun arka plan hikayesi
 
-    // Kurucu metod: Sadece 3 bilgi istiyoruz (Sayı yok!)
-    public Karakter(string ad, string rol, string hikaye)
+    // Kurucu metod güncellendi
+    public Karakter(string ad, string gorunum, string hikaye)
     {
         Ad = ad;
-        Rol = rol;
+        Gorunum = gorunum;
         Hikaye = hikaye;
     }
 
-    // Ekrana yazdırma özelliği
     public void Bilgiyazdir()
     {
-        Console.WriteLine($"Karakter: {Ad} - {Rol}");
-        Console.WriteLine($"Hikaye: {Hikaye}");
-        Console.WriteLine("-------------------------");
+        Console.WriteLine($"┌── {Ad.ToUpper()} ──────────────────────────");
+        Console.WriteLine($"│ Görünüm: {Gorunum}");
+        Console.WriteLine($"│ Hikaye:  {Hikaye}"); // Uzun hikaye burada görünecek
+        Console.WriteLine($"└──────────────────────────────────────────\n");
     }
 }
