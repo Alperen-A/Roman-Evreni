@@ -1,124 +1,73 @@
 ﻿using Roman_Evreni;
 using System.IO;
 
-// --- 1. GEÇMİŞİ YÜKLE ---
-Console.WriteLine("--- GEÇMİŞ KAYITLAR KONTROL EDİLİYOR ---");
-if (File.Exists("Evren_Kayitlari.txt"))
-{
-    string[] eskiSatirlar = File.ReadAllLines("Evren_Kayitlari.txt");
-    foreach (string satir in eskiSatirlar) Console.WriteLine(satir);
-    Console.WriteLine("--- GEÇMİŞ BAŞARIYLA YÜKLENDİ ---\n");
-}
-else
-{
-    Console.WriteLine("Henüz kaydedilmiş bir evren yok.\n");
-}
-
-// --- 2. LİSTELERİ OLUŞTUR ---
+// --- 1. LİSTELER VE YÜKLEME ---
 List<Karakter> Karakterler = new List<Karakter>();
 List<Mekan> Mekanlar = new List<Mekan>();
 List<Olay> Olaylar = new List<Olay>();
 
-// --- 3. MENÜ SİSTEMİ ---
+// Program açılırken dosyayı oku (Geçmişi Hatırla)
+if (File.Exists("Evren_Kayitlari.txt"))
+{
+    Console.WriteLine("--- GEÇMİŞ KAYITLAR YÜKLENİYOR ---");
+    // Dosya okuma mantığını buraya geliştirerek ekleyebiliriz
+}
+
 while (true) 
 {
-    Console.WriteLine("\n=============================");
-    Console.WriteLine("       ROMAN EVRENİ v1.1      ");
-    Console.WriteLine("=============================");
-    Console.WriteLine("1. Yeni Karakter Ekle");
-    Console.WriteLine("2. Listele (Karakter/Mekan/Olay)");
-    Console.WriteLine("3. Karakter Sil (YENİ)"); // <-- YENİ ÖZELLİK
-    Console.WriteLine("4. Kaydet ve Çıkış");      // <-- NUMARASI DEĞİŞTİ
-    Console.Write("Seçiminiz (1-4): ");
+    // --- 2. DASHBOARD (İSTATİSTİKLER) ---
+    Console.Clear(); 
+    Console.WriteLine("=================================================");
+    Console.WriteLine($"   ROMAN EVRENİ | K: {Karakterler.Count} | M: {Mekanlar.Count} | O: {Olaylar.Count}   ");
+    Console.WriteLine("=================================================");
+    Console.WriteLine("1. Karakter Yönetimi (Ekle/Sil/Filtrele)");
+    Console.WriteLine("2. Mekan Yönetimi (Yarın)");
+    Console.WriteLine("3. Olay Yönetimi (Yarın)");
+    Console.WriteLine("4. Kaydet ve Çıkış");
+    Console.Write("\nBölüm Seçiniz: ");
     
-    string secim = Console.ReadLine() ?? "";
+    string anaSecim = Console.ReadLine() ?? "";
 
-    // --- SEÇENEK 1: EKLEME ---
-    if (secim == "1") 
+    if (anaSecim == "1") // --- KARAKTER ODASI ---
     {
-        Console.WriteLine("\n--- YENİ KARAKTER EKLE ---");
-        Console.Write("Karakterin Adı: ");
-        string isim = Console.ReadLine() ?? ""; 
-
-        if (isim.ToLower() == "iptal") { Console.WriteLine("İptal edildi."); continue; }
-        if (string.IsNullOrWhiteSpace(isim)) isim = "İsimsiz";
-
-        Console.Write("Karakterin Rolü: ");
-        string rol = Console.ReadLine() ?? "Köylü";
-
-        Karakterler.Add(new Karakter(isim, rol, "Hikaye girilmedi."));
-        Console.WriteLine($"--> {isim} listeye eklendi!");
-    }
-    
-    // --- SEÇENEK 2: LİSTELEME ---
-    else if (secim == "2") 
-    {
-        Console.WriteLine("\n=== GÜNCEL EVREN RAPORU ===");
-        if (Karakterler.Count == 0) Console.WriteLine("(Karakter listesi boş.)");
-        
-        foreach (var k in Karakterler) k.Bilgiyazdir();
-        // (Mekan ve Olayları da buraya ekleyebilirsin)
-
-        Console.WriteLine("\n(Devam etmek için Enter'a bas...)");
-        Console.ReadLine(); 
-    }
-
-    // --- SEÇENEK 3: SİLME (YENİ) ---
-    else if (secim == "3")
-    {
-        Console.WriteLine("\n--- KARAKTER SİLME ---");
-        Console.Write("Silinecek karakterin adı: ");
-        string silinecekIsim = Console.ReadLine() ?? "";
-
-        // Listede bu ismi arayalım (Büyük/küçük harf fark etmesin)
-        Karakter? silinecekKarakter = null;
-
-        foreach (var k in Karakterler)
+        while (true)
         {
-            if (k.Ad.ToLower() == silinecekIsim.ToLower())
-            {
-                silinecekKarakter = k;
-                break; // Bulduk, aramayı bitir.
+            Console.WriteLine("\n-- KARAKTER MENÜSÜ --");
+            Console.WriteLine("[A] Ekle | [S] Sil | [L] Listele | [F] Filtrele | [G] Geri");
+            Console.Write("Seçim: ");
+            string kSecim = Console.ReadLine()?.ToUpper() ?? "";
+
+            if (kSecim == "G") break; // Ana menüye fırlatır
+
+            if (kSecim == "A") {
+                Console.Write("İsim: "); string n = Console.ReadLine() ?? "İsimsiz";
+                if(n.ToLower() == "iptal") continue;
+                Console.Write("Rol: "); string r = Console.ReadLine() ?? "Köylü";
+                Karakterler.Add(new Karakter(n, r, "Hikaye yok."));
+            }
+            else if (kSecim == "L") {
+                foreach (var k in Karakterler) k.Bilgiyazdir();
+                Console.WriteLine("Devam için Enter..."); Console.ReadLine();
+            }
+            else if (kSecim == "S") {
+                Console.Write("Silinecek İsim: "); string s = Console.ReadLine() ?? "";
+                var hedef = Karakterler.Find(x => x.Ad.ToLower() == s.ToLower());
+                if (hedef != null) { Karakterler.Remove(hedef); Console.WriteLine("Silindi!"); }
+            }
+            else if (kSecim == "F") { // FİLTRELEME
+                Console.Write("Aranan Rol: "); string aranan = Console.ReadLine()?.ToLower() ?? "";
+                var bulunanlar = Karakterler.FindAll(x => x.Rol.ToLower().Contains(aranan));
+                foreach (var b in bulunanlar) b.Bilgiyazdir();
+                Console.ReadLine();
             }
         }
-
-        // Eğer bulduysak siliyoruz
-        if (silinecekKarakter != null)
-        {
-            Karakterler.Remove(silinecekKarakter);
-            Console.WriteLine($"--> {silinecekKarakter.Ad} başarıyla silindi!");
-        }
-        else
-        {
-            Console.WriteLine("--> Böyle bir karakter bulunamadı!");
-        }
     }
-    
-    // --- SEÇENEK 4: ÇIKIŞ ---
-    else if (secim == "4") 
+    else if (anaSecim == "4") // KAYDET VE ÇIK
     {
-        Console.WriteLine("Çıkış yapılıyor...");
-        break; 
+        List<string> satirlar = new List<string>();
+        foreach (var k in Karakterler) satirlar.Add($"Karakter: {k.Ad} ({k.Rol})");
+        File.AppendAllLines("Evren_Kayitlari.txt", satirlar);
+        Console.WriteLine("Kaydedildi. Güle güle!");
+        break;
     }
-    else
-    {
-        Console.WriteLine("Hatalı seçim! Lütfen 1-4 arasında bir sayı girin.");
-    }
-}
-
-// --- 4. DOSYAYA KAYIT ---
-Console.WriteLine("\n--- KAYIT İŞLEMİ ---");
-List<string> satirlar = new List<string>();
-
-if (Karakterler.Count > 0)
-{
-    satirlar.Add($"\n--- Rapor Tarihi: {DateTime.Now} ---");
-    foreach (var k in Karakterler) satirlar.Add($"Karakter: {k.Ad} ({k.Rol})");
-    
-    File.AppendAllLines("Evren_Kayitlari.txt", satirlar);
-    Console.WriteLine("Veriler kaydedildi!");
-}
-else
-{
-    Console.WriteLine("Listede yeni veri yok, kayıt yapılmadı.");
 }
