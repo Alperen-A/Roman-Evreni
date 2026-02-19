@@ -1,0 +1,28 @@
+{
+  "Karakterler": [
+    {
+      "Ad": "Alperen",
+      "Gorunum": "Sava\u015F\u00E7\u0131",
+      "Hikaye": "Karanl\u0131k ve rutubetli zindana girdi ve eski dostu b\u00FCy\u00FCc\u00FC Melisa\u0027y\u0131 g\u00F6rd\u00FC."
+    },
+    {
+      "Ad": "Melisa",
+      "Gorunum": "B\u00FCy\u00FCc\u00FC",
+      "Hikaye": "Alperen\u0027in eski dostu, karanl\u0131k ve rutubetli zindanda bulunuyordu."
+    }
+  ],
+  "Mekanlar": [
+    {
+      "Ad": "Zindan",
+      "Betimleme": "Karanl\u0131k ve rutubetli"
+    }
+  ],
+  "Olaylar": [
+    {
+      "Ad": "Alperen\u0027in Zindana Giri\u015Fi ve Melisa\u0027y\u0131 G\u00F6rmesi",
+      "Karakterler": "Alperen, Melisa",
+      "Tarih": "Belirtilmemi\u015F (o an)",
+      "Betimleme": "Sava\u015F\u00E7\u0131 Alperen, karanl\u0131k ve rutubetli zindana girdi\u011Finde eski dostu b\u00FCy\u00FCc\u00FC Melisa\u0027y\u0131 g\u00F6rd\u00FC."
+    }
+  ]
+}
