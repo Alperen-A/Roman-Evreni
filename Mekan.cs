@@ -3,20 +3,18 @@ namespace Roman_Evreni;
 public class Mekan
 {
     public string Ad { get; set; }
-    public string Tur { get; set; }
-    public string Hikaye { get; set; }
+    public string Betimleme { get; set; }
 
-    public Mekan(string ad, string tur, string hikaye)
+    public Mekan(string ad, string betimleme)
     {
         Ad = ad;
-        Tur = tur;
-        Hikaye = hikaye;
+        Betimleme = betimleme;
     }
 
     public void Bilgiyazdir()
     {
-        Console.WriteLine($"Mekan: {Ad} ({Tur})");
-        Console.WriteLine($"Detay: {Hikaye}");
+        Console.WriteLine($"Mekan: {Ad}");
+        Console.WriteLine($"Betimleme: {Betimleme}");
         Console.WriteLine("-------------------------");
     }
 }

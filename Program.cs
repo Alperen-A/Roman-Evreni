@@ -1,141 +1,148 @@
-﻿using Roman_Evreni;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using Roman_Evreni;
 
-// --- 1. LİSTELER ---
+// --- 1. Listeler ---
 List<Karakter> Karakterler = new List<Karakter>();
 List<Mekan> Mekanlar = new List<Mekan>();
 List<Olay> Olaylar = new List<Olay>();
 
 while (true) 
 {
-    // --- 2. DASHBOARD ---
+    // --- 2. Dashboard ---
     Console.Clear(); 
-    Console.WriteLine("=================================================");
-    Console.WriteLine($"   ROMAN EVRENİ | K: {Karakterler.Count} | M: {Mekanlar.Count} | O: {Olaylar.Count}   ");
-    Console.WriteLine("=================================================");
-    Console.WriteLine("1. Karakter Yönetimi (Görünüm ve Hikaye Odaklı)");
-    Console.WriteLine("2. Mekan Yönetimi");
-    Console.WriteLine("3. Olay Yönetimi");
-    Console.WriteLine("4. Kaydet ve Çıkış");
-    Console.Write("\nBölüm Seçiniz: ");
+    Console.WriteLine("-------------------------------------------------");
+    Console.WriteLine($"  Roman evreni | K: {Karakterler.Count} | M: {Mekanlar.Count} | O: {Olaylar.Count}   ");
+    Console.WriteLine("-------------------------------------------------");
+    Console.WriteLine("1. Karakter yönetimi (Görünüm ve hikaye odaklı)");
+    Console.WriteLine("2. Mekan yönetimi");
+    Console.WriteLine("3. Olay yönetimi");
+    Console.WriteLine("4. Kaydet ve çıkış");
+    Console.Write("\nBölüm seçiniz: ");
     
-    string anaSecim = Console.ReadLine() ?? "";
+    string mainSecim = Console.ReadLine() ?? "";
 
-    if (anaSecim == "1") // --- KARAKTER ODASI ---
+    if (mainSecim == "1") // --- Karakter odasi ---
     {
         while (true)
         {
-            Console.WriteLine("\n-- KARAKTER MENÜSÜ --");
-            Console.WriteLine("[A] Ekle | [S] Sil | [L] Listele | [F] Hikayede Ara | [G] Geri");
+            Console.WriteLine("\n-- Karakter menüsü --");
+            Console.WriteLine("[A] Ekle | [S] Sil | [L] Listele | [F] Hikayede ara | [G] Geri");
             Console.Write("Seçim: ");
-            string kSecim = Console.ReadLine()?.ToUpper() ?? "";
+            string kSecim = Console.ReadLine() ?? "";
+            
+            if (kSecim.ToLower() == "g") break;
 
-            if (kSecim == "G") break;
-
-            if (kSecim == "A") // EKLEME (GÜNCELLENDİ)
+            if (kSecim.ToLower() == "a")
             {
-                Console.Write("Karakter Adı (Veya iptal): "); 
+                Console.Write("Karakter adı (Veya iptal): "); 
                 string ad = Console.ReadLine() ?? "İsimsiz";
                 if(ad.ToLower() == "iptal") continue;
 
-                // Rol yerine Fiziksel Görünüm soruyoruz
-                Console.Write("Fiziksel Görünüm (Boy, saç, göz, giysi vb.): "); 
+                Console.Write("Fiziksel görünüm (Boy, saç, göz, giysi vb.): "); 
                 string gorunum = Console.ReadLine() ?? "Belirtilmedi";
 
-                // Uzun hikaye girişi
-                Console.WriteLine("Arka Plan / Hikaye (İstediğin kadar uzun yazıp Enter'a bas): ");
+                Console.WriteLine("Arka plan / Hikaye (İstediğin kadar uzun yazıp enter tuşuna bas): ");
                 string hikaye = Console.ReadLine() ?? "Hikaye girilmedi.";
 
                 Karakterler.Add(new Karakter(ad, gorunum, hikaye));
                 Console.WriteLine("--> Karakter detaylarıyla kaydedildi!");
             }
-            else if (kSecim == "L") // LİSTELEME
+            else if (kSecim.ToLower() == "l")
             {
-                Console.WriteLine("\n--- KARAKTER DETAYLARI ---");
+                Console.WriteLine("\n--- Karakter detayları ---");
                 foreach (var k in Karakterler) k.Bilgiyazdir();
-                Console.WriteLine("Devam için Enter..."); Console.ReadLine();
+                Console.WriteLine("Devam için enter tuşuna bas..."); Console.ReadLine();
             }
-            else if (kSecim == "S") // SİLME
+            else if (kSecim.ToLower() == "s")
             {
-                Console.Write("Silinecek İsim: "); string s = Console.ReadLine() ?? "";
+                Console.Write("Silinecek isim: "); string s = Console.ReadLine() ?? "";
                 var h = Karakterler.Find(x => x.Ad.ToLower() == s.ToLower());
                 if (h != null) { Karakterler.Remove(h); Console.WriteLine("Silindi!"); }
                 else Console.WriteLine("Bulunamadı.");
             }
-            else if (kSecim == "F") // FİLTRELEME (GÜNCELLENDİ)
+            else if (kSecim.ToLower() == "f")
             {
-                // Artık Rol olmadığı için hikaye içinde kelime arıyoruz
-                Console.Write("Hikayede veya Görünümde geçen kelime (Örn: 'yara izi', 'büyücü'): "); 
+                Console.Write("Hikayede veya görünümde geçen kelime: "); 
                 string f = Console.ReadLine()?.ToLower() ?? "";
                 
                 var sonuclar = Karakterler.FindAll(x => x.Hikaye.ToLower().Contains(f) || x.Gorunum.ToLower().Contains(f));
                 
-                Console.WriteLine($"\n--- '{f.ToUpper()}' İÇEREN KARAKTERLER ---");
+                Console.WriteLine($"\n--- '{f}' Içeren karakterler ---");
                 foreach (var item in sonuclar) item.Bilgiyazdir();
                 Console.ReadLine();
             }
         }
     }
-    else if (anaSecim == "2") // --- MEKAN ODASI ---
+    else if (mainSecim == "2") // --- Mekan odasi ---
     {
         while (true)
         {
-            Console.WriteLine("\n-- MEKAN MENÜSÜ --");
+            Console.WriteLine("\n-- Mekan menüsü --");
             Console.WriteLine("[A] Ekle | [S] Sil | [L] Listele | [G] Geri");
             Console.Write("Seçim: ");
-            string mSecim = Console.ReadLine()?.ToUpper() ?? "";
-            if (mSecim == "G") break;
+            string mSecim = Console.ReadLine() ?? "";
+            
+            if (mSecim.ToLower() == "g") break;
 
-            if (mSecim == "A") {
-                Console.Write("Mekan Adı: "); string n = Console.ReadLine() ?? "İsimsiz";
-                Console.Write("Tür (Orman, Kale vb.): "); string t = Console.ReadLine() ?? "Bilinmiyor";
-                Mekanlar.Add(new Mekan(n, t, "Detay yok."));
+            if (mSecim.ToLower() == "a") {
+                Console.Write("Mekan adı: "); string n = Console.ReadLine() ?? "İsimsiz";
+                Console.Write("Betimleme (Atmosfer, koku, gizli geçitler vb.): "); string b = Console.ReadLine() ?? "Belirtilmedi";
+                Mekanlar.Add(new Mekan(n, b));
                 Console.WriteLine("--> Mekan eklendi!");
             }
-            else if (mSecim == "L") {
+            else if (mSecim.ToLower() == "l") {
+                Console.WriteLine("\n--- Mekan detayları ---");
                 foreach (var m in Mekanlar) m.Bilgiyazdir();
-                Console.WriteLine("\nDevam için Enter..."); Console.ReadLine();
+                Console.WriteLine("Devam için enter tuşuna bas..."); Console.ReadLine();
             }
-            else if (mSecim == "S") {
-                Console.Write("Silinecek Mekan Adı: "); string s = Console.ReadLine() ?? "";
+            else if (mSecim.ToLower() == "s") {
+                Console.Write("Silinecek mekan adı: "); string s = Console.ReadLine() ?? "";
                 var h = Mekanlar.Find(x => x.Ad.ToLower() == s.ToLower());
                 if (h != null) { Mekanlar.Remove(h); Console.WriteLine("Mekan silindi!"); }
+                else Console.WriteLine("Bulunamadı.");
             }
         }
     }
-    else if (anaSecim == "3") // --- OLAY ODASI ---
+    else if (mainSecim == "3") // --- Olay odasi ---
     {
         while (true)
         {
-            Console.WriteLine("\n-- OLAY MENÜSÜ --");
+            Console.WriteLine("\n-- Olay menüsü --");
             Console.WriteLine("[A] Ekle | [S] Sil | [L] Listele | [G] Geri");
             Console.Write("Seçim: ");
-            string oSecim = Console.ReadLine()?.ToUpper() ?? "";
-            if (oSecim == "G") break;
+            string oSecim = Console.ReadLine() ?? "";
+            
+            if (oSecim.ToLower() == "g") break;
 
-            if (oSecim == "A") {
-                Console.Write("Olay Adı: "); string n = Console.ReadLine() ?? "Bilinmiyor";
+            if (oSecim.ToLower() == "a") {
+                Console.Write("Olay adı: "); string n = Console.ReadLine() ?? "Bilinmiyor";
+                Console.Write("İçindeki karakterler (Örn: Alperen, melisa): "); string k = Console.ReadLine() ?? "Belirtilmedi";
                 Console.Write("Tarih: "); string t = Console.ReadLine() ?? "Bilinmiyor";
-                Olaylar.Add(new Olay(n, t, "Sonuç girilmedi."));
+                Console.Write("Betimleme (Sonuçlar, kayıplar, değişen dengeler vb.): "); string b = Console.ReadLine() ?? "Belirtilmedi";
+                Olaylar.Add(new Olay(n, k, t, b));
                 Console.WriteLine("--> Olay kaydedildi!");
             }
-            else if (oSecim == "L") {
+            else if (oSecim.ToLower() == "l") {
+                Console.WriteLine("\n--- Olay detayları ---");
                 foreach (var o in Olaylar) o.Bilgiyazdir();
-                Console.WriteLine("\nDevam için Enter..."); Console.ReadLine();
+                Console.WriteLine("Devam için enter tuşuna bas..."); Console.ReadLine();
             }
-            else if (oSecim == "S") {
-                Console.Write("Silinecek Olay Adı: "); string s = Console.ReadLine() ?? "";
+            else if (oSecim.ToLower() == "s") {
+                Console.Write("Silinecek olay adı: "); string s = Console.ReadLine() ?? "";
                 var h = Olaylar.Find(x => x.Ad.ToLower() == s.ToLower());
                 if (h != null) { Olaylar.Remove(h); Console.WriteLine("Olay silindi!"); }
+                else Console.WriteLine("Bulunamadı.");
             }
         }
     }
-    else if (anaSecim == "4") // --- KAYDET VE ÇIKIŞ ---
+    else if (mainSecim == "4") // --- Kaydet ve çikis ---
     {
         List<string> satirlar = new List<string>();
-        satirlar.Add($"\n--- DETAYLI EVREN RAPORU: {DateTime.Now} ---");
+        satirlar.Add($"\n--- Detaylı evren raporu: {DateTime.Now} ---");
         
-        satirlar.Add("\n--- KARAKTERLER ---");
+        satirlar.Add("\n--- Karakterler ---");
         foreach (var k in Karakterler) 
         {
             satirlar.Add($"İsim: {k.Ad}");
@@ -144,14 +151,25 @@ while (true)
             satirlar.Add("-------------------------");
         }
 
-        satirlar.Add("\n--- MEKANLAR ---");
-        foreach (var m in Mekanlar) satirlar.Add($"Mekan: {m.Ad} ({m.Tur})");
+        satirlar.Add("\n--- Mekanlar ---");
+        foreach (var m in Mekanlar) 
+        {
+            satirlar.Add($"Mekan: {m.Ad}");
+            satirlar.Add($"Betimleme: {m.Betimleme}");
+            satirlar.Add("-------------------------");
+        }
         
-        satirlar.Add("\n--- OLAYLAR ---");
-        foreach (var o in Olaylar) satirlar.Add($"Olay: {o.Ad} ({o.Tarih})");
+        satirlar.Add("\n--- Olaylar ---");
+        foreach (var o in Olaylar) 
+        {
+            satirlar.Add($"Olay: {o.Ad} ({o.Tarih})");
+            satirlar.Add($"Karakterler: {o.Karakterler}");
+            satirlar.Add($"Betimleme: {o.Betimleme}");
+            satirlar.Add("-------------------------");
+        }
         
-        File.AppendAllLines("Evren_Kayitlari.txt", satirlar);
-        Console.WriteLine("Tüm hikaye ve detaylar kaydedildi. İyi günler!");
+        File.AppendAllLines("Evren_kayitlari.txt", satirlar);
+        Console.WriteLine("Tüm hikaye ve detaylar kaydedildi. Iyi günler!");
         break;
     }
 }
