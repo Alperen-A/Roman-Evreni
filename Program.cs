@@ -288,15 +288,47 @@ while (true)
         Console.WriteLine($"{aktifEvren} evreni basariyla kaydedildi. Iyi gunler!");
         break;
     }
+   
     else if (mainSecim == "5") 
     {
         Console.Clear();
         Console.WriteLine("\n-- Yapay zeka ile metin analizi --");
-        Console.WriteLine("Buraya romanindan bir parca yapistir. Yapay zeka icindeki karakterleri, mekanlari ve olaylari bulup evrenine ekleyecek.");
-        Console.Write("\nMetni yapistir (Veya iptal yaz): ");
-        string metin = Console.ReadLine() ?? "";
+        Console.WriteLine("1. Metni dogrudan yapistir");
+        Console.WriteLine("2. Txt dosyasindan okut");
+        Console.WriteLine("3. Geri don");
+        Console.Write("Seciminiz: ");
+        
+        string aiSecim = Console.ReadLine() ?? "";
+        string metin = "";
 
-        if (metin.ToLower() == "iptal" || string.IsNullOrWhiteSpace(metin)) continue;
+        if (aiSecim == "1")
+        {
+            Console.WriteLine("Buraya romanindan bir parca yapistir.");
+            Console.Write("\nMetni yapistir: ");
+            metin = Console.ReadLine() ?? "";
+        }
+        else if (aiSecim == "2")
+        {
+            Console.Write("\nTxt dosyasinin tam yolunu gir (Ornek: C:\\yazilar\\bolum1.txt): ");
+            string dosyaYoluAi = Console.ReadLine() ?? "";
+            
+            if (File.Exists(dosyaYoluAi))
+            {
+                metin = File.ReadAllText(dosyaYoluAi);
+                Console.WriteLine("--> Dosya basariyla okundu!");
+            }
+            else
+            {
+                Console.WriteLine("Dosya bulunamadi. Lutfen yolu kontrol edip tekrar dene.");
+                continue;
+            }
+        }
+        else
+        {
+            continue;
+        }
+
+        if (string.IsNullOrWhiteSpace(metin)) continue;
 
         Console.WriteLine("\nYapay zeka dusunuyor, lutfen bekle...");
 
@@ -306,9 +338,9 @@ while (true)
             using HttpClient client = new HttpClient();
             string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
 
-            string prompt = "Su metni analiz et ve icindeki karakterleri, mekanlari, olaylari bul. Sadece Json formatinda dondur. Kesinlikle markdown (```json) kullanma. Format su olsun: {\"Karakterler\": [{\"Ad\": \"...\", \"Gorunum\": \"...\", \"Hikaye\": \"...\"}], \"Mekanlar\": [{\"Ad\": \"...\", \"Betimleme\": \"...\"}], \"Olaylar\": [{\"Ad\": \"...\", \"Karakterler\": \"...\", \"Tarih\": \"...\", \"Betimleme\": \"...\"}]}. Metin: " + metin;
+            string prompt = "Su metni analiz et ve icindeki karakterleri, mekanlari, olaylari bul. Sadece Json formatinda dondur. Kesinlikle markdown kullanma. Format su olsun: {\"Karakterler\": [{\"Ad\": \"...\", \"Gorunum\": \"...\", \"Hikaye\": \"...\"}], \"Mekanlar\": [{\"Ad\": \"...\", \"Betimleme\": \"...\"}], \"Olaylar\": [{\"Ad\": \"...\", \"Karakterler\": \"...\", \"Tarih\": \"...\", \"Betimleme\": \"...\"}]}. Metin: " + metin;
 
-            var istekGövdesi = new
+            var istekGovdesi = new
             {
                 contents = new[]
                 {
@@ -316,7 +348,7 @@ while (true)
                 }
             };
 
-            string jsonIstek = JsonSerializer.Serialize(istekGövdesi);
+            string jsonIstek = JsonSerializer.Serialize(istekGovdesi);
             var icerik = new StringContent(jsonIstek, Encoding.UTF8, "application/json");
 
             HttpResponseMessage cevap = await client.PostAsync(url, icerik);
@@ -351,6 +383,7 @@ while (true)
         Console.WriteLine("\nDevam etmek icin enter tusuna bas...");
         Console.ReadLine();
     }
+    
     else if (mainSecim == "6") // Yeni evren silme ozelligi
     {
         Console.WriteLine("\n-- DIKKAT! TEHLIKELI ISLEM --");

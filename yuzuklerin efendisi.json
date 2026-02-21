@@ -9,12 +9,26 @@
       "Ad": "Melisa",
       "Gorunum": "B\u00FCy\u00FCc\u00FC",
       "Hikaye": "Alperen\u0027in eski dostu, karanl\u0131k ve rutubetli zindanda bulunuyordu."
+    },
+    {
+      "Ad": "Ahmet",
+      "Gorunum": "\u0130yi kalpli bir marangoz",
+      "Hikaye": "Uzak bir k\u00F6yde ya\u015Fayan, k\u00FC\u00E7\u00FCk k\u0131z\u0131 Elif\u0027i \u00E7ok seven, k\u00F6y halk\u0131na \u00E7e\u015Fitli e\u015Fyalar yaparak yard\u0131m eden bir marangoz. En \u00F6zel e\u015Fyas\u0131 Alt\u0131n Balta\u0027d\u0131r."
+    },
+    {
+      "Ad": "Elif",
+      "Gorunum": "K\u00FC\u00E7\u00FCk k\u0131z\u0131",
+      "Hikaye": "Ahmet\u0027in k\u0131z\u0131, babas\u0131 taraf\u0131ndan \u00E7ok seviliyor."
     }
   ],
   "Mekanlar": [
     {
       "Ad": "Zindan",
       "Betimleme": "Karanl\u0131k ve rutubetli"
+    },
+    {
+      "Ad": "Uzak bir k\u00F6y",
+      "Betimleme": "Ahmet ve k\u0131z\u0131 Elif\u0027in ya\u015Fad\u0131\u011F\u0131, Ahmet\u0027in k\u00F6y halk\u0131na yard\u0131m etti\u011Fi yer."
     }
   ],
   "Olaylar": [
@@ -23,6 +37,12 @@
       "Karakterler": "Alperen, Melisa",
       "Tarih": "Belirtilmemi\u015F (o an)",
       "Betimleme": "Sava\u015F\u00E7\u0131 Alperen, karanl\u0131k ve rutubetli zindana girdi\u011Finde eski dostu b\u00FCy\u00FCc\u00FC Melisa\u0027y\u0131 g\u00F6rd\u00FC."
+    },
+    {
+      "Ad": "Ahmet\u0027in K\u00F6y Halk\u0131na Yard\u0131mlar\u0131",
+      "Karakterler": "Ahmet, K\u00F6y halk\u0131",
+      "Tarih": "Belirtilmemi\u015F",
+      "Betimleme": "Marangoz Ahmet\u0027in, k\u00F6y halk\u0131na \u00E7e\u015Fitli e\u015Fyalar yaparak d\u00FCzenli olarak yard\u0131m etmesi."
     }
   ]
 }
