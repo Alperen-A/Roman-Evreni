@@ -10,9 +10,9 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
-    private void OnKarakterlerClicked(object sender, EventArgs e)
+   private async void OnKarakterlerClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Bilgi", "Karakterler bolumu cok yakinda eklenecek!", "Tamam");
+        await Navigation.PushModalAsync(new Karakterlerpage());
     }
 
     private void OnMekanlarClicked(object sender, EventArgs e)
