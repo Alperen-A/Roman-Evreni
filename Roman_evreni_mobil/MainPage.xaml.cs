@@ -1,24 +1,27 @@
-﻿namespace Roman_evreni_mobil;
+﻿using System;
+using Microsoft.Maui.Controls;
+
+namespace Roman_evreni_mobil;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    public MainPage()
+    {
+        InitializeComponent();
+    }
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    private void OnKarakterlerClicked(object sender, EventArgs e)
+    {
+        DisplayAlert("Bilgi", "Karakterler bolumu cok yakinda eklenecek!", "Tamam");
+    }
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+    private void OnMekanlarClicked(object sender, EventArgs e)
+    {
+        DisplayAlert("Bilgi", "Mekanlar bolumu cok yakinda eklenecek!", "Tamam");
+    }
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    private void OnOlaylarClicked(object sender, EventArgs e)
+    {
+        DisplayAlert("Bilgi", "Olaylar bolumu cok yakinda eklenecek!", "Tamam");
+    }
 }
-
