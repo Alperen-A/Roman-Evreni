@@ -10,6 +10,14 @@
         
         <Label Text="Burada romanindaki karakterleri listeleyecegiz." FontSize="16" TextColor="#dddddd" HorizontalOptions="Center" />
 
+        <Entry x:Name="EntryKarakterAdi" Placeholder="Yeni karakter adini gir..." BackgroundColor="#ffffff" TextColor="#000000" HeightRequest="50" Margin="0,20,0,20" />
+
+        <Button x:Name="BtnKarakterEkle" Text="Listeye ekle" Clicked="OnKarakterEkleClicked" BackgroundColor="#00ff00" TextColor="#000000" CornerRadius="8" FontAttributes="Bold" HeightRequest="45" />
+        
+        <Label Text="Eklenen karakterler:" FontSize="18" TextColor="#ffff00" Margin="0,20,0,10" FontAttributes="Bold"/>
+        
+        <VerticalStackLayout x:Name="KarakterListesi" Spacing="10" />
+
         <Button x:Name="BtnGeri" Text="Main menuye don" Clicked="OnGeriClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="12" FontAttributes="Bold" HeightRequest="50" Margin="0,50,0,0" />
         
     </VerticalStackLayout>

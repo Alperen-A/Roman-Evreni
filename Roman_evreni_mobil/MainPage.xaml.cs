@@ -3,25 +3,31 @@ using Microsoft.Maui.Controls;
 
 namespace Roman_evreni_mobil;
 
-public partial class MainPage : ContentPage
+public partial class Karakterlerpage : ContentPage
 {
-    public MainPage()
+    public Karakterlerpage()
     {
         InitializeComponent();
     }
 
-   private async void OnKarakterlerClicked(object sender, EventArgs e)
+    private void OnKarakterEkleClicked(object sender, EventArgs e)
     {
-        await Navigation.PushModalAsync(new Karakterlerpage());
+        if (!string.IsNullOrWhiteSpace(EntryKarakterAdi.Text))
+        {
+            var yeniKarakter = new Label 
+            { 
+                Text = "🗡️ " + EntryKarakterAdi.Text, 
+                TextColor = Colors.White, 
+                FontSize = 18 
+            };
+            
+            KarakterListesi.Children.Add(yeniKarakter);
+            EntryKarakterAdi.Text = string.Empty; 
+        }
     }
 
-    private void OnMekanlarClicked(object sender, EventArgs e)
+    private async void OnGeriClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Bilgi", "Mekanlar bolumu cok yakinda eklenecek!", "Tamam");
-    }
-
-    private void OnOlaylarClicked(object sender, EventArgs e)
-    {
-        DisplayAlert("Bilgi", "Olaylar bolumu cok yakinda eklenecek!", "Tamam");
+        await Navigation.PopModalAsync();
     }
 }
