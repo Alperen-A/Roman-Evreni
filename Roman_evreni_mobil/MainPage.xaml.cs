@@ -10,18 +10,36 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        
+        // Ismi tasarimla ayni olacak sekilde kucuk harfe cevirdik
+        if (Aktif_evren.Mevcut != null)
+        {
+            Lbl_evrenadi.Text = "🌌 " + Aktif_evren.Mevcut.Evren_adi;
+        }
+    }
+
     private async void OnKarakterlerClicked(object sender, EventArgs e)
     {
         await Navigation.PushModalAsync(new Karakterlerpage());
     }
 
-    private void OnMekanlarClicked(object sender, EventArgs e)
+    // Buraya async kelimesini ekledik
+    private async void OnMekanlarClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Bilgi", "Mekanlar bolumu cok yakinda eklenecek!", "Tamam");
+        // Sonuna noktali virgul eklendi
+        await Navigation.PushModalAsync(new Mekanlarpage());
     }
 
-    private void OnOlaylarClicked(object sender, EventArgs e)
+   private async void OnOlaylarClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Bilgi", "Olaylar bolumu cok yakinda eklenecek!", "Tamam");
+        await Navigation.PushModalAsync(new Olaylarpage());
+    }
+
+    private async void OnGeriClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopModalAsync();
     }
 }

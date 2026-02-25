@@ -7,15 +7,17 @@
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
 
-            <Label Text="Roman evreni" FontSize="32" FontAttributes="Bold" TextColor="#ffffff" HorizontalOptions="Center" />
+            <Label x:Name="Lbl_evrenadi" Text="Roman evreni" FontSize="32" FontAttributes="Bold" TextColor="#ffffff" HorizontalOptions="Center" />
+            
+            <Label Text="Yonetim sistemine hos geldiniz" FontSize="16" TextColor="#dddddd" HorizontalOptions="Center" Margin="0,0,0,20" />
 
-            <Label Text="Yonetim sistemine hos geldiniz" FontSize="18" TextColor="#dddddd" HorizontalOptions="Center" />
+            <Button x:Name="Btn_karakterler" Text="1. Karakter yonetimi" Clicked="OnKarakterlerClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="25" FontAttributes="Bold" HeightRequest="55" WidthRequest="250" HorizontalOptions="Center" />
 
-            <Button x:Name="BtnKarakterler" Text="1. Karakter yonetimi" Clicked="OnKarakterlerClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="12" FontAttributes="Bold" HeightRequest="60" />
+            <Button x:Name="Btn_mekanlar" Text="2. Mekan yonetimi" Clicked="OnMekanlarClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="25" FontAttributes="Bold" HeightRequest="55" WidthRequest="250" HorizontalOptions="Center" />
 
-            <Button x:Name="BtnMekanlar" Text="2. Mekan yonetimi" Clicked="OnMekanlarClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="12" FontAttributes="Bold" HeightRequest="60" />
+            <Button x:Name="Btn_olaylar" Text="3. Olay yonetimi" Clicked="OnOlaylarClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="25" FontAttributes="Bold" HeightRequest="55" WidthRequest="250" HorizontalOptions="Center" />
 
-            <Button x:Name="BtnOlaylar" Text="3. Olay yonetimi" Clicked="OnOlaylarClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="12" FontAttributes="Bold" HeightRequest="60" />
+            <Button Text="Evren secimine don" Clicked="OnGeriClicked" BackgroundColor="#ff4444" TextColor="#ffffff" CornerRadius="25" FontAttributes="Bold" HeightRequest="50" WidthRequest="200" HorizontalOptions="Center" Margin="0,40,0,0" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Roman_evreni_mobil.Giris_sayfasi"
+             BackgroundColor="#180d31">
+
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Start" x:Name="Main_kutu" Opacity="0">
+
+        <Label Text="Evren yonetimi" FontSize="32" FontAttributes="Bold" TextColor="#ffffff" HorizontalOptions="Center" Margin="0,20,0,10" />
+
+        <Entry x:Name="Entry_yeni_evren" Placeholder="Yeni bir evren adi yaz..." BackgroundColor="#ffffff" TextColor="#000000" HeightRequest="50" WidthRequest="250" HorizontalOptions="Center" Margin="0,0,0,10" />
+        
+        <Button Text="Yeni evren olustur" Clicked="On_evren_olustur_clicked" BackgroundColor="#00ff00" TextColor="#000000" FontAttributes="Bold" CornerRadius="25" HeightRequest="55" WidthRequest="250" HorizontalOptions="Center" />
+
+        <BoxView HeightRequest="1" Color="#555555" Margin="0,15,0,15" />
+
+        <Label Text="Kayitli evrenlerin:" FontSize="18" TextColor="#ffff00" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+        <ScrollView HeightRequest="350">
+            <VerticalStackLayout x:Name="Evrenler_listesi" Spacing="10" HorizontalOptions="Center" />
+        </ScrollView>
+
+    </VerticalStackLayout>
+</ContentPage>

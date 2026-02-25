@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.Mekanlarpage"
-             Title="Mekanlarpage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-           
+             x:Class="Roman_evreni_mobil.Mekanlarpage"
+             BackgroundColor="#180d31">
+
+    <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+        
+        <Label Text="Mekan yonetimi" FontSize="28" FontAttributes="Bold" TextColor="#ffffff" HorizontalOptions="Center" />
+        
+        <Label Text="Romanindaki sehirleri ve bolgeleri buraya ekle." FontSize="14" TextColor="#dddddd" HorizontalOptions="Center" />
+
+        <Entry x:Name="Entry_mekanadi" Placeholder="Yeni mekan adini gir..." BackgroundColor="#ffffff" TextColor="#000000" HeightRequest="50" Margin="0,20,0,10" />
+
+        <Button Text="Listeye ekle" Clicked="OnMekanEkleClicked" BackgroundColor="#00ff00" TextColor="#000000" CornerRadius="20" FontAttributes="Bold" HeightRequest="45" WidthRequest="200" HorizontalOptions="Center" />
+        
+        <Label Text="Eklenen mekanlar:" FontSize="18" TextColor="#ffff00" Margin="0,20,0,10" FontAttributes="Bold"/>
+        
+        <ScrollView HeightRequest="200">
+            <VerticalStackLayout x:Name="Mekan_listesi" Spacing="10" />
+        </ScrollView>
+
+        <Button Text="Main menuye don" Clicked="OnGeriClicked" BackgroundColor="#ff4444" TextColor="#ffffff" CornerRadius="20" FontAttributes="Bold" HeightRequest="50" WidthRequest="200" HorizontalOptions="Center" Margin="0,30,0,0" />
+        
     </VerticalStackLayout>
 </ContentPage>

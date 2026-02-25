@@ -1,7 +1,7 @@
 using System;
+using System.Linq;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Storage; // Telefonun hafizasina erismek icin eklendi
 
 namespace Roman_evreni_mobil;
 
@@ -10,38 +10,48 @@ public partial class Karakterlerpage : ContentPage
     public Karakterlerpage()
     {
         InitializeComponent();
-        KarakterleriYukle(); // Sayfa acildiginda eski kayitlari getirir
-    }
-
-    private void OnKarakterEkleClicked(object sender, EventArgs e)
-    {
-        if (!string.IsNullOrWhiteSpace(EntryKarakterAdi.Text))
-        {
-            string yeniAd = EntryKarakterAdi.Text;
-            
-            // 1. Ekrana ekle
-            EkranaKarakterEkle(yeniAd);
-
-            // 2. Telefon hafizasina kaydet
-            string eskiListe = Preferences.Default.Get("KayitliKarakterler", "");
-            Preferences.Default.Set("KayitliKarakterler", eskiListe + yeniAd + ",");
-
-            // 3. Kutuyu temizle
-            EntryKarakterAdi.Text = string.Empty; 
-        }
+        KarakterleriYukle();
     }
 
     private void KarakterleriYukle()
     {
-        // Hafizadaki listeyi alip ekrana dizer
-        string kayitliListe = Preferences.Default.Get("KayitliKarakterler", "");
-        if (!string.IsNullOrEmpty(kayitliListe))
+        KarakterListesi.Children.Clear();
+        
+        // Aktif evrenin icindeki karakterleri ekrana dizer
+        if (Aktif_evren.Mevcut != null && Aktif_evren.Mevcut.Karakterler != null)
         {
-            string[] karakterler = kayitliListe.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            foreach (var k in karakterler)
+            foreach (var k in Aktif_evren.Mevcut.Karakterler)
             {
                 EkranaKarakterEkle(k);
             }
+        }
+    }
+
+    private void OnKarakterEkleClicked(object sender, EventArgs e)
+    {
+        
+        string? yeniAd = EntryKarakterAdi.Text?.Trim();
+        
+        if (!string.IsNullOrWhiteSpace(yeniAd) && Aktif_evren.Mevcut != null)
+        {
+            // 1. Ekrana ekle
+            EkranaKarakterEkle(yeniAd);
+
+            // 2. Hafizadaki aktif evrenin listesine ekle
+            Aktif_evren.Mevcut.Karakterler.Add(yeniAd);
+
+            // 3. Tum listeyi Json dosyasina kalici olarak kaydet
+            var tum_evrenler = Json_motoru.Yukle();
+            var guncellenecek_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut.Evren_adi);
+            
+            if (guncellenecek_evren != null)
+            {
+                guncellenecek_evren.Karakterler = Aktif_evren.Mevcut.Karakterler;
+                Json_motoru.Kaydet(tum_evrenler);
+            }
+
+            // 4. Kutuyu temizle
+            EntryKarakterAdi.Text = string.Empty; 
         }
     }
 

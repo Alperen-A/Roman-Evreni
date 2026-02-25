@@ -1,11 +1,14 @@
-﻿namespace Roman_evreni_mobil;
+﻿using Microsoft.Maui.Controls;
+
+namespace Roman_evreni_mobil;
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
+    public App()
+    {
+        InitializeComponent();
 
-		MainPage = new AppShell();
-	}
+        // Uygulama artik animasyonlu giris sayfasindan baslayacak
+        MainPage = new Giris_sayfasi();
+    }
 }
