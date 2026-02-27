@@ -28,7 +28,6 @@ public partial class Olaylarpage : ContentPage
 
     private void OnOlayEkleClicked(object sender, EventArgs e)
     {
-        // Soru isareti ile mavi uyarilari engelledik
         string? yeni_ad = Entry_olayadi.Text?.Trim();
         
         if (!string.IsNullOrWhiteSpace(yeni_ad) && Aktif_evren.Mevcut != null)
@@ -51,13 +50,46 @@ public partial class Olaylarpage : ContentPage
 
     private void Ekrana_olay_ekle(string ad)
     {
-        var yeni_olay = new Label 
+        var yatay_kutu = new HorizontalStackLayout { Spacing = 15, Margin = new Thickness(0, 5) };
+
+        var isim_etiketi = new Label 
         { 
             Text = "📜 " + ad, 
             TextColor = Colors.White, 
-            FontSize = 18 
+            FontSize = 18,
+            VerticalOptions = LayoutOptions.Center,
+            WidthRequest = 200
         };
-        Olay_listesi.Children.Add(yeni_olay);
+
+        var sil_butonu = new Button
+        {
+            Text = "Sil",
+            BackgroundColor = Colors.Red,
+            TextColor = Colors.White,
+            WidthRequest = 50,
+            HeightRequest = 40,
+            CornerRadius = 20
+        };
+
+        sil_butonu.Clicked += (s, e) =>
+        {
+            Aktif_evren.Mevcut?.Olaylar.Remove(ad);
+
+            var tum_evrenler = Json_motoru.Yukle();
+            var guncel_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
+            
+            if (guncel_evren != null && Aktif_evren.Mevcut != null)
+            {
+                guncel_evren.Olaylar = Aktif_evren.Mevcut.Olaylar;
+                Json_motoru.Kaydet(tum_evrenler);
+            }
+
+            Olay_listesi.Children.Remove(yatay_kutu);
+        };
+
+        yatay_kutu.Children.Add(isim_etiketi);
+        yatay_kutu.Children.Add(sil_butonu);
+        Olay_listesi.Children.Add(yatay_kutu);
     }
 
     private async void OnGeriClicked(object sender, EventArgs e)
