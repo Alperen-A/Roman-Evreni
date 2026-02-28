@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.Maui.Controls;
-using System.Threading.Tasks;
+using Microsoft.Maui.Graphics;
 
 namespace Roman_evreni_mobil;
 
@@ -18,8 +18,10 @@ public partial class Giris_sayfasi : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await Main_kutu.FadeTo(1, 800, Easing.CubicOut);
         Evrenleri_yukle_ve_ciz();
+        
+        // Siyah ekranda yazilarin zarifce belirmesini saglayan animasyon
+        await Main_kutu.FadeTo(1, 800); 
     }
 
     private void Evrenleri_yukle_ve_ciz()
@@ -27,87 +29,88 @@ public partial class Giris_sayfasi : ContentPage
         _tum_evrenler = Json_motoru.Yukle(); 
         Evrenler_listesi.Children.Clear();
 
-        if (_tum_evrenler.Count == 0)
-        {
-            Evrenler_listesi.Children.Add(new Label { Text = "Henuz bir evren yok. Yukaridan olusturabilirsin.", TextColor = Colors.Gray, HorizontalOptions = LayoutOptions.Center });
-            return;
-        }
+        if (_tum_evrenler.Count == 0) return;
 
         foreach (var evren in _tum_evrenler)
         {
-            // Butonlari ekranin tam ortasina hizaliyoruz
-            var yatay_kutu = new HorizontalStackLayout { Spacing = 10, HorizontalOptions = LayoutOptions.Center };
-
-            // Estetik evren giris butonu
-            var btn_giris = new Button 
+            var dikey_kutu = new VerticalStackLayout();
+            
+            var yatay_kutu = new Grid 
             { 
-                Text = "🌌 " + evren.Evren_adi, 
-                BackgroundColor = Color.FromArgb("#ffff00"), 
-                TextColor = Colors.Black, 
-                FontAttributes = FontAttributes.Bold,
-                WidthRequest = 200,
-                HeightRequest = 50,
-                CornerRadius = 25
+                ColumnDefinitions = new ColumnDefinitionCollection 
+                { 
+                    new ColumnDefinition { Width = GridLength.Star }, 
+                    new ColumnDefinition { Width = GridLength.Auto } 
+                }, 
+                Padding = new Thickness(0, 15) 
+            };
+
+            // Evren adi etiketi (Zarif Serif font)
+            var isim_etiketi = new Label 
+            { 
+                Text = evren.Evren_adi, 
+                TextColor = Color.FromArgb("#a3a3a3"), 
+                FontSize = 20, 
+                FontFamily = "Serif", 
+                VerticalOptions = LayoutOptions.Center 
             };
             
-            btn_giris.Clicked += async (s, e) => 
-            {
-                await btn_giris.ScaleTo(0.9, 100);
-                await btn_giris.ScaleTo(1, 100);
-
+            var tap_giris = new TapGestureRecognizer();
+            tap_giris.Tapped += async (s, e) => 
+            { 
                 Aktif_evren.Mevcut = evren; 
                 await Navigation.PushModalAsync(new MainPage()); 
             };
+            isim_etiketi.GestureRecognizers.Add(tap_giris);
 
-            // Estetik yuvarlak silme butonu
-            var btn_sil = new Button 
+            // Silme butonu yerine zarif bir carpi isareti
+            var sil_butonu = new Label 
             { 
-                Text = "X", 
-                BackgroundColor = Colors.Red, 
-                TextColor = Colors.White,
-                FontAttributes = FontAttributes.Bold,
-                WidthRequest = 50,
-                HeightRequest = 50,
-                CornerRadius = 25
+                Text = "✕", 
+                TextColor = Color.FromArgb("#525252"), 
+                FontSize = 18, 
+                VerticalOptions = LayoutOptions.Center, 
+                Padding = new Thickness(15, 0, 0, 0) 
             };
-
-            btn_sil.Clicked += async (s, e) => 
+            
+            var tap_sil = new TapGestureRecognizer();
+            tap_sil.Tapped += async (s, e) => 
             {
-                bool onay = await DisplayAlert("Uyari", $"{evren.Evren_adi} evreni silinsin mi?", "Evet", "Hayir");
-                if(onay)
-                {
-                    _tum_evrenler.Remove(evren);
-                    Json_motoru.Kaydet(_tum_evrenler);
+                bool onay = await DisplayAlert("Uyarı", $"{evren.Evren_adi} silinsin mi?", "Evet", "Hayır");
+                if(onay) 
+                { 
+                    _tum_evrenler.Remove(evren); 
+                    Json_motoru.Kaydet(_tum_evrenler); 
                     Evrenleri_yukle_ve_ciz(); 
                 }
             };
+            sil_butonu.GestureRecognizers.Add(tap_sil);
 
-            yatay_kutu.Children.Add(btn_giris);
-            yatay_kutu.Children.Add(btn_sil);
+            yatay_kutu.Add(isim_etiketi, 0, 0);
+            yatay_kutu.Add(sil_butonu, 1, 0);
             
-            Evrenler_listesi.Children.Add(yatay_kutu);
+            dikey_kutu.Children.Add(yatay_kutu);
+            
+            // Incecik alt ayrac
+            dikey_kutu.Children.Add(new BoxView { HeightRequest = 1, Color = Color.FromArgb("#171717") });
+            
+            Evrenler_listesi.Children.Add(dikey_kutu);
         }
     }
 
+    // Yeni ekledigimiz arti (+) isaretine tiklama motoru
     private void On_evren_olustur_clicked(object sender, EventArgs e)
     {
-        // Soru isareti ile mavi uyariyi engelledik
         string? yeni_ad = Entry_yeni_evren.Text?.Trim();
-        
-        if (!string.IsNullOrEmpty(yeni_ad))
-        {
-            if (_tum_evrenler.Any(x => x.Evren_adi.ToLower() == yeni_ad.ToLower()))
-            {
-                DisplayAlert("Hata", "Bu isimde bir evren zaten var!", "Tamam");
-                return;
-            }
 
+        if (!string.IsNullOrWhiteSpace(yeni_ad))
+        {
             var yeni_evren = new Evren_verisi { Evren_adi = yeni_ad };
             _tum_evrenler.Add(yeni_evren);
             Json_motoru.Kaydet(_tum_evrenler);
             
-            Entry_yeni_evren.Text = string.Empty; 
-            Evrenleri_yukle_ve_ciz(); 
+            Evrenleri_yukle_ve_ciz();
+            Entry_yeni_evren.Text = string.Empty;
         }
     }
 }

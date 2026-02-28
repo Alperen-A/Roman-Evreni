@@ -33,8 +33,10 @@ public partial class Karakterlerpage : ContentPage
 
         if (!string.IsNullOrWhiteSpace(yeni_ad) && Aktif_evren.Mevcut != null)
         {
-            Ekrana_karakter_ekle(yeni_ad);
-            Aktif_evren.Mevcut.Karakterler.Add(yeni_ad);
+            var yeni_karakter = new Karakter_bilgisi { Ad = yeni_ad };
+
+            Ekrana_karakter_ekle(yeni_karakter);
+            Aktif_evren.Mevcut.Karakterler.Add(yeni_karakter);
 
             var tum_evrenler = Json_motoru.Yukle();
             var guncellenecek_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut.Evren_adi);
@@ -49,32 +51,50 @@ public partial class Karakterlerpage : ContentPage
         }
     }
 
-    private void Ekrana_karakter_ekle(string ad)
+    private void Ekrana_karakter_ekle(Karakter_bilgisi karakter)
     {
-        var yatay_kutu = new HorizontalStackLayout { Spacing = 15, Margin = new Thickness(0, 5) };
+        var yatay_kutu = new HorizontalStackLayout { Spacing = 10, Margin = new Thickness(0, 5) };
 
         var isim_etiketi = new Label
         {
-            Text = "🗡️ " + ad,
+            Text = "🗡️ " + karakter.Ad,
             TextColor = Colors.White,
-            FontSize = 18,
+            FontSize = 16,
             VerticalOptions = LayoutOptions.Center,
-            WidthRequest = 200
+            WidthRequest = 140
         };
 
+        // Yeni estetik detay butonu (Koyu mor arkaplan)
+        var detay_butonu = new Button
+        {
+            Text = "Detay",
+            BackgroundColor = Color.FromArgb("#2a1b54"), 
+            TextColor = Colors.White,
+            WidthRequest = 70,
+            HeightRequest = 35,
+            CornerRadius = 17,
+            Padding = 0
+        };
+
+        detay_butonu.Clicked += async (s, e) =>
+        {
+            await Navigation.PushModalAsync(new Karakter_detay_page(karakter));
+        };
+
+        // Yeni estetik sil butonu (Arkaplansiz, sadece kirmizi yazi)
         var sil_butonu = new Button
         {
             Text = "Sil",
-            BackgroundColor = Colors.Red,
-            TextColor = Colors.White,
+            BackgroundColor = Colors.Transparent,
+            TextColor = Color.FromArgb("#ff4444"), 
             WidthRequest = 50,
-            HeightRequest = 40,
-            CornerRadius = 20
+            HeightRequest = 35,
+            Padding = 0
         };
 
         sil_butonu.Clicked += (s, e) =>
         {
-            Aktif_evren.Mevcut?.Karakterler.Remove(ad);
+            Aktif_evren.Mevcut?.Karakterler.Remove(karakter);
 
             var tum_evrenler = Json_motoru.Yukle();
             var guncel_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
@@ -89,6 +109,7 @@ public partial class Karakterlerpage : ContentPage
         };
 
         yatay_kutu.Children.Add(isim_etiketi);
+        yatay_kutu.Children.Add(detay_butonu);
         yatay_kutu.Children.Add(sil_butonu);
         KarakterListesi.Children.Add(yatay_kutu);
     }

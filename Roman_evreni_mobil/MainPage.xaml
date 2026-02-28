@@ -2,23 +2,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Roman_evreni_mobil.MainPage"
-             BackgroundColor="#180d31">
+             BackgroundColor="#0a0a0a">
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
+    <Grid RowDefinitions="Auto, *">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="20,40,20,20">
+            <Button Text="← Çıkış" Clicked="OnGeriClicked" BackgroundColor="Transparent" TextColor="#737373" FontSize="16" Padding="0" HorizontalOptions="Start" />
+            <Label x:Name="Lbl_evrenadi" Grid.Column="1" Text="Evren" FontSize="26" FontAttributes="Bold" TextColor="#ededed" HorizontalOptions="End" VerticalOptions="Center" FontFamily="Serif" />
+        </Grid>
 
-            <Label x:Name="Lbl_evrenadi" Text="Roman evreni" FontSize="32" FontAttributes="Bold" TextColor="#ffffff" HorizontalOptions="Center" />
+        <VerticalStackLayout Grid.Row="1" Padding="20,20,20,40" Spacing="25">
+            <Button Text="Karakterler" Clicked="OnKarakterlerClicked" BackgroundColor="Transparent" TextColor="#a3a3a3" FontSize="22" FontFamily="Serif" HorizontalOptions="Start" Padding="0" />
+            <BoxView HeightRequest="1" Color="#171717" />
             
-            <Label Text="Yonetim sistemine hos geldiniz" FontSize="16" TextColor="#dddddd" HorizontalOptions="Center" Margin="0,0,0,20" />
-
-            <Button x:Name="Btn_karakterler" Text="1. Karakter yonetimi" Clicked="OnKarakterlerClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="25" FontAttributes="Bold" HeightRequest="55" WidthRequest="250" HorizontalOptions="Center" />
-
-            <Button x:Name="Btn_mekanlar" Text="2. Mekan yonetimi" Clicked="OnMekanlarClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="25" FontAttributes="Bold" HeightRequest="55" WidthRequest="250" HorizontalOptions="Center" />
-
-            <Button x:Name="Btn_olaylar" Text="3. Olay yonetimi" Clicked="OnOlaylarClicked" BackgroundColor="#ffff00" TextColor="#000000" CornerRadius="25" FontAttributes="Bold" HeightRequest="55" WidthRequest="250" HorizontalOptions="Center" />
-
-            <Button Text="Evren secimine don" Clicked="OnGeriClicked" BackgroundColor="#ff4444" TextColor="#ffffff" CornerRadius="25" FontAttributes="Bold" HeightRequest="50" WidthRequest="200" HorizontalOptions="Center" Margin="0,40,0,0" />
-
+            <Button Text="Mekanlar" Clicked="OnMekanlarClicked" BackgroundColor="Transparent" TextColor="#a3a3a3" FontSize="22" FontFamily="Serif" HorizontalOptions="Start" Padding="0" />
+            <BoxView HeightRequest="1" Color="#171717" />
+            
+            <Button Text="Olay Örgüsü" Clicked="OnOlaylarClicked" BackgroundColor="Transparent" TextColor="#a3a3a3" FontSize="22" FontFamily="Serif" HorizontalOptions="Start" Padding="0" />
+            <BoxView HeightRequest="1" Color="#171717" />
         </VerticalStackLayout>
-    </ScrollView>
+    </Grid>
 </ContentPage>

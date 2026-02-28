@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Roman_evreni_mobil.Karakter_detay_page"
+             BackgroundColor="#110922">
+
+    <Grid RowDefinitions="Auto, *">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="15,20,15,15" BackgroundColor="#110922">
+            <Button Grid.Column="0" Text="❮ Geri" Clicked="On_geri_clicked" BackgroundColor="Transparent" TextColor="#b3b3b3" FontAttributes="Bold" HeightRequest="40" Padding="0" HorizontalOptions="Start" />
+            
+            <Label Grid.Column="1" Text="Detaylar" FontSize="20" FontAttributes="Bold" TextColor="#ffffff" HorizontalOptions="Center" VerticalOptions="Center" />
+            
+            <Button Grid.Column="2" Text="Kaydet" Clicked="On_kaydet_clicked" BackgroundColor="Transparent" TextColor="#1db954" FontAttributes="Bold" HeightRequest="40" Padding="0" HorizontalOptions="End" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20" Padding="25">
+                
+                <Label Text="Karakter adi" TextColor="#b3b3b3" FontSize="14" Margin="5,0,0,-10" />
+                <Frame BackgroundColor="#2a1b54" CornerRadius="15" Padding="0" HasShadow="False">
+                    <Entry x:Name="Entry_ad" BackgroundColor="Transparent" TextColor="#ffffff" IsEnabled="False" Margin="15,0" HeightRequest="50" />
+                </Frame>
+
+                <Label Text="Evrendeki rolu" TextColor="#b3b3b3" FontSize="14" Margin="5,0,0,-10" />
+                <Frame BackgroundColor="#2a1b54" CornerRadius="15" Padding="0" HasShadow="False">
+                    <Entry x:Name="Entry_rol" BackgroundColor="Transparent" TextColor="#ffffff" Margin="15,0" HeightRequest="50" />
+                </Frame>
+
+                <Label Text="Kullandigi silah" TextColor="#b3b3b3" FontSize="14" Margin="5,0,0,-10" />
+                <Frame BackgroundColor="#2a1b54" CornerRadius="15" Padding="0" HasShadow="False">
+                    <Entry x:Name="Entry_silah" BackgroundColor="Transparent" TextColor="#ffffff" Margin="15,0" HeightRequest="50" />
+                </Frame>
+
+                <Label Text="Arka plan hikayesi" TextColor="#b3b3b3" FontSize="14" Margin="5,0,0,-10" />
+                <Frame BackgroundColor="#2a1b54" CornerRadius="15" Padding="0" HasShadow="False">
+                    <Editor x:Name="Editor_hikaye" BackgroundColor="Transparent" TextColor="#ffffff" HeightRequest="150" Margin="15,10" />
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

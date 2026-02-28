@@ -26,7 +26,7 @@ public partial class Olaylarpage : ContentPage
         }
     }
 
-    private void OnOlayEkleClicked(object sender, EventArgs e)
+    private void On_olay_ekle_clicked(object sender, EventArgs e)
     {
         string? yeni_ad = Entry_olayadi.Text?.Trim();
         
@@ -50,49 +50,61 @@ public partial class Olaylarpage : ContentPage
 
     private void Ekrana_olay_ekle(string ad)
     {
-        var yatay_kutu = new HorizontalStackLayout { Spacing = 15, Margin = new Thickness(0, 5) };
+        var dikey_kutu = new VerticalStackLayout();
+
+        var yatay_kutu = new Grid 
+        { 
+            ColumnDefinitions = new ColumnDefinitionCollection { new ColumnDefinition { Width = GridLength.Star }, new ColumnDefinition { Width = GridLength.Auto } },
+            Padding = new Thickness(0, 15)
+        };
 
         var isim_etiketi = new Label 
         { 
-            Text = "📜 " + ad, 
-            TextColor = Colors.White, 
+            Text = ad, 
+            TextColor = Color.FromArgb("#a3a3a3"), 
+            FontSize = 18,
+            FontFamily = "Serif",
+            VerticalOptions = LayoutOptions.Center
+        };
+
+        // Kaba buton yerine zarif bir carpi isareti
+        var sil_butonu = new Label
+        {
+            Text = "✕",
+            TextColor = Color.FromArgb("#525252"),
             FontSize = 18,
             VerticalOptions = LayoutOptions.Center,
-            WidthRequest = 200
+            Padding = new Thickness(15, 0, 0, 0)
         };
 
-        var sil_butonu = new Button
-        {
-            Text = "Sil",
-            BackgroundColor = Colors.Red,
-            TextColor = Colors.White,
-            WidthRequest = 50,
-            HeightRequest = 40,
-            CornerRadius = 20
-        };
-
-        sil_butonu.Clicked += (s, e) =>
+        var tap_sil = new TapGestureRecognizer();
+        tap_sil.Tapped += (s, e) =>
         {
             Aktif_evren.Mevcut?.Olaylar.Remove(ad);
-
             var tum_evrenler = Json_motoru.Yukle();
             var guncel_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
-            
             if (guncel_evren != null && Aktif_evren.Mevcut != null)
             {
                 guncel_evren.Olaylar = Aktif_evren.Mevcut.Olaylar;
                 Json_motoru.Kaydet(tum_evrenler);
             }
-
-            Olay_listesi.Children.Remove(yatay_kutu);
+            Olay_listesi.Children.Remove(dikey_kutu);
         };
+        sil_butonu.GestureRecognizers.Add(tap_sil);
 
-        yatay_kutu.Children.Add(isim_etiketi);
-        yatay_kutu.Children.Add(sil_butonu);
-        Olay_listesi.Children.Add(yatay_kutu);
+        yatay_kutu.Add(isim_etiketi, 0, 0);
+        yatay_kutu.Add(sil_butonu, 1, 0);
+        
+        // Her elemanin altina cok ince bir ayrac
+        var ayrac = new BoxView { HeightRequest = 1, Color = Color.FromArgb("#171717") };
+        
+        dikey_kutu.Children.Add(yatay_kutu);
+        dikey_kutu.Children.Add(ayrac);
+
+        Olay_listesi.Children.Add(dikey_kutu);
     }
 
-    private async void OnGeriClicked(object sender, EventArgs e)
+    private async void On_geri_clicked(object sender, EventArgs e)
     {
         await Navigation.PopModalAsync();
     }

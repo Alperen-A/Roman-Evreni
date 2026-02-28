@@ -22,7 +22,15 @@ public static class Json_motoru
             return new List<Evren_verisi>();
         }
 
-        string json_metni = File.ReadAllText(Dosya_yolu);
-        return JsonSerializer.Deserialize<List<Evren_verisi>>(json_metni) ?? new List<Evren_verisi>();
+        // Eski yapidaki dosyayi okurken cokerse diye guvenlik onlemi
+        try 
+        {
+            string json_metni = File.ReadAllText(Dosya_yolu);
+            return JsonSerializer.Deserialize<List<Evren_verisi>>(json_metni) ?? new List<Evren_verisi>();
+        }
+        catch 
+        {
+            return new List<Evren_verisi>(); // Hata verirse temiz bir baslangic yapar
+        }
     }
 }

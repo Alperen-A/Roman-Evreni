@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Roman_evreni_mobil.Mekan_detay_page"
+             BackgroundColor="#09090b">
+
+    <Grid RowDefinitions="Auto, *">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="15,20,15,15" BackgroundColor="#09090b">
+            <Button Grid.Column="0" Text="❮ Geri" Clicked="On_geri_clicked" BackgroundColor="Transparent" TextColor="#a1a1aa" FontAttributes="Bold" HeightRequest="40" Padding="0" HorizontalOptions="Start" />
+            
+            <Label Grid.Column="1" Text="Mekan detaylari" FontSize="20" FontAttributes="Bold" TextColor="#fafafa" HorizontalOptions="Center" VerticalOptions="Center" />
+            
+            <Button Grid.Column="2" Text="Kaydet" Clicked="On_kaydet_clicked" BackgroundColor="Transparent" TextColor="#38bdf8" FontAttributes="Bold" HeightRequest="40" Padding="0" HorizontalOptions="End" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20" Padding="25">
+                
+                <Label Text="Mekan adi" TextColor="#a1a1aa" FontSize="14" Margin="5,0,0,-10" />
+                <Frame BackgroundColor="#18181b" CornerRadius="15" Padding="0" HasShadow="False">
+                    <Entry x:Name="Entry_ad" BackgroundColor="Transparent" TextColor="#fafafa" IsEnabled="False" Margin="15,0" HeightRequest="50" />
+                </Frame>
+
+                <Label Text="Cografi yapisi ve iklimi" TextColor="#a1a1aa" FontSize="14" Margin="5,0,0,-10" />
+                <Frame BackgroundColor="#18181b" CornerRadius="15" Padding="0" HasShadow="False">
+                    <Entry x:Name="Entry_iklim" BackgroundColor="Transparent" TextColor="#fafafa" Margin="15,0" HeightRequest="50" />
+                </Frame>
+
+                <Label Text="Yonetici veya hukumdar" TextColor="#a1a1aa" FontSize="14" Margin="5,0,0,-10" />
+                <Frame BackgroundColor="#18181b" CornerRadius="15" Padding="0" HasShadow="False">
+                    <Entry x:Name="Entry_hukumdar" BackgroundColor="Transparent" TextColor="#fafafa" Margin="15,0" HeightRequest="50" />
+                </Frame>
+
+                <Label Text="Tarihi ve ozellikleri" TextColor="#a1a1aa" FontSize="14" Margin="5,0,0,-10" />
+                <Frame BackgroundColor="#18181b" CornerRadius="15" Padding="0" HasShadow="False">
+                    <Editor x:Name="Editor_aciklama" BackgroundColor="Transparent" TextColor="#fafafa" HeightRequest="150" Margin="15,10" />
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
