@@ -16,7 +16,7 @@ public partial class Karakterlerpage : ContentPage
 
     private void Karakterleri_yukle()
     {
-        KarakterListesi.Children.Clear();
+        Karakter_listesi.Children.Clear();
 
         if (Aktif_evren.Mevcut != null && Aktif_evren.Mevcut.Karakterler != null)
         {
@@ -27,9 +27,9 @@ public partial class Karakterlerpage : ContentPage
         }
     }
 
-    private void OnKarakterEkleClicked(object sender, EventArgs e)
+    private void On_karakter_ekle_clicked(object sender, EventArgs e)
     {
-        string? yeni_ad = EntryKarakterAdi.Text?.Trim();
+        string? yeni_ad = Entry_karakter_adi.Text?.Trim();
 
         if (!string.IsNullOrWhiteSpace(yeni_ad) && Aktif_evren.Mevcut != null)
         {
@@ -47,74 +47,85 @@ public partial class Karakterlerpage : ContentPage
                 Json_motoru.Kaydet(tum_evrenler);
             }
 
-            EntryKarakterAdi.Text = string.Empty;
+            Entry_karakter_adi.Text = string.Empty;
         }
     }
 
     private void Ekrana_karakter_ekle(Karakter_bilgisi karakter)
     {
-        var yatay_kutu = new HorizontalStackLayout { Spacing = 10, Margin = new Thickness(0, 5) };
+        var dikey_kutu = new VerticalStackLayout();
 
-        var isim_etiketi = new Label
+        var yatay_kutu = new Grid 
+        { 
+            ColumnDefinitions = new ColumnDefinitionCollection 
+            { 
+                new ColumnDefinition { Width = GridLength.Star }, 
+                new ColumnDefinition { Width = GridLength.Auto },
+                new ColumnDefinition { Width = GridLength.Auto }
+            }, 
+            Padding = new Thickness(0, 15) 
+        };
+
+        var isim_etiketi = new Label 
+        { 
+            Text = karakter.Ad, 
+            TextColor = Color.FromArgb("#a3a3a3"), 
+            FontSize = 18,
+            FontFamily = "Serif",
+            VerticalOptions = LayoutOptions.Center 
+        };
+
+        var detay_butonu = new Label
         {
-            Text = "🗡️ " + karakter.Ad,
-            TextColor = Colors.White,
-            FontSize = 16,
+            Text = "→",
+            TextColor = Color.FromArgb("#737373"),
+            FontSize = 22,
             VerticalOptions = LayoutOptions.Center,
-            WidthRequest = 140
+            Padding = new Thickness(15, 0, 10, 0)
         };
-
-        // Yeni estetik detay butonu (Koyu mor arkaplan)
-        var detay_butonu = new Button
-        {
-            Text = "Detay",
-            BackgroundColor = Color.FromArgb("#2a1b54"), 
-            TextColor = Colors.White,
-            WidthRequest = 70,
-            HeightRequest = 35,
-            CornerRadius = 17,
-            Padding = 0
-        };
-
-        detay_butonu.Clicked += async (s, e) =>
+        var tap_detay = new TapGestureRecognizer();
+        tap_detay.Tapped += async (s, e) =>
         {
             await Navigation.PushModalAsync(new Karakter_detay_page(karakter));
         };
+        detay_butonu.GestureRecognizers.Add(tap_detay);
 
-        // Yeni estetik sil butonu (Arkaplansiz, sadece kirmizi yazi)
-        var sil_butonu = new Button
+        var sil_butonu = new Label
         {
-            Text = "Sil",
-            BackgroundColor = Colors.Transparent,
-            TextColor = Color.FromArgb("#ff4444"), 
-            WidthRequest = 50,
-            HeightRequest = 35,
-            Padding = 0
+            Text = "✕",
+            TextColor = Color.FromArgb("#525252"),
+            FontSize = 18,
+            VerticalOptions = LayoutOptions.Center,
+            Padding = new Thickness(10, 0, 0, 0)
         };
-
-        sil_butonu.Clicked += (s, e) =>
+        var tap_sil = new TapGestureRecognizer();
+        tap_sil.Tapped += (s, e) =>
         {
             Aktif_evren.Mevcut?.Karakterler.Remove(karakter);
-
             var tum_evrenler = Json_motoru.Yukle();
             var guncel_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
-            
             if (guncel_evren != null && Aktif_evren.Mevcut != null)
             {
                 guncel_evren.Karakterler = Aktif_evren.Mevcut.Karakterler;
                 Json_motoru.Kaydet(tum_evrenler);
             }
-
-            KarakterListesi.Children.Remove(yatay_kutu);
+            Karakter_listesi.Children.Remove(dikey_kutu);
         };
+        sil_butonu.GestureRecognizers.Add(tap_sil);
 
-        yatay_kutu.Children.Add(isim_etiketi);
-        yatay_kutu.Children.Add(detay_butonu);
-        yatay_kutu.Children.Add(sil_butonu);
-        KarakterListesi.Children.Add(yatay_kutu);
+        yatay_kutu.Add(isim_etiketi, 0, 0);
+        yatay_kutu.Add(detay_butonu, 1, 0);
+        yatay_kutu.Add(sil_butonu, 2, 0);
+        
+        var ayrac = new BoxView { HeightRequest = 1, Color = Color.FromArgb("#171717") };
+        
+        dikey_kutu.Children.Add(yatay_kutu);
+        dikey_kutu.Children.Add(ayrac);
+
+        Karakter_listesi.Children.Add(dikey_kutu);
     }
 
-    private async void OnGeriClicked(object sender, EventArgs e)
+    private async void On_geri_clicked(object sender, EventArgs e)
     {
         await Navigation.PopModalAsync();
     }

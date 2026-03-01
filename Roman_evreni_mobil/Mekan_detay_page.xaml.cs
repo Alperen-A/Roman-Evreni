@@ -13,7 +13,6 @@ public partial class Mekan_detay_page : ContentPage
         InitializeComponent();
         _secili_mekan = mekan;
         
-        // Ekrani mevcut bilgilerle dolduruyoruz
         Entry_ad.Text = _secili_mekan.Ad;
         Entry_iklim.Text = _secili_mekan.Iklim;
         Entry_hukumdar.Text = _secili_mekan.Hukumdar;

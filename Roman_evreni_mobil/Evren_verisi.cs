@@ -2,14 +2,13 @@ using System.Collections.Generic;
 
 namespace Roman_evreni_mobil;
 
+
 public class Karakter_bilgisi
 {
     public string Ad { get; set; } = "";
-    public string Rol { get; set; } = "";
-    public string Silah { get; set; } = "";
+    public string Dis_gorunus { get; set; } = ""; 
     public string Hikaye { get; set; } = "";
 }
-
 // Mekanlar icin yeni detay sinifimiz
 public class Mekan_bilgisi
 {

@@ -42,4 +42,8 @@ public partial class MainPage : ContentPage
     {
         await Navigation.PopModalAsync();
     }
+    private async void On_asistan_clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new Yapay_zeka_page());
+    }
 }

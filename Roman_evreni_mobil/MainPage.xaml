@@ -19,6 +19,10 @@
             
             <Button Text="Olay Örgüsü" Clicked="OnOlaylarClicked" BackgroundColor="Transparent" TextColor="#a3a3a3" FontSize="22" FontFamily="Serif" HorizontalOptions="Start" Padding="0" />
             <BoxView HeightRequest="1" Color="#171717" />
+
+            <Button Text="Yapay Zeka Asistanı" Clicked="On_asistan_clicked" BackgroundColor="Transparent" TextColor="#a3a3a3" FontSize="22" FontFamily="Serif" HorizontalOptions="Start" Padding="0" />
+            <BoxView HeightRequest="1" Color="#171717" />
+            
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

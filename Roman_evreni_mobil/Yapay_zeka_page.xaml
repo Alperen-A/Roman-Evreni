@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Roman_evreni_mobil.Yapay_zeka_page"
+             BackgroundColor="#0a0a0a">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+        
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="20,40,20,20">
+            <Label Text="← Geri" TextColor="#737373" FontSize="16" VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="On_geri_clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <Label Grid.Column="1" Text="Asistan" FontSize="26" FontAttributes="Bold" TextColor="#ededed" HorizontalOptions="End" VerticalOptions="Center" FontFamily="Serif" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout x:Name="Sohbet_kutusu" Spacing="25" Padding="20,10,20,20">
+               <Label Text="Evrenin hakkinda tavsiye isteyebilir veya ham roman notlarini yapistirarak karakter ve mekan listelerini otomatik doldurmami saglayabilirsin." TextColor="#525252" FontSize="14" FontFamily="Serif" FontAttributes="Italic" HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="0,20,0,0" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*, Auto" Padding="20,10,20,30">
+            <Entry x:Name="Entry_soru" Placeholder="Yapay zekaya sor..." PlaceholderColor="#525252" TextColor="#d4d4d4" BackgroundColor="Transparent" FontSize="16" Margin="0,0,10,0" FontFamily="Serif" />
+            
+            <Label Grid.Column="1" Text="↑" FontSize="28" TextColor="#d4d4d4" VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="On_sor_clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <BoxView HeightRequest="1" Color="#262626" VerticalOptions="End" Grid.ColumnSpan="2" Margin="0,0,0,-5" />
+        </Grid>
+        
+    </Grid>
+</ContentPage>

@@ -2,33 +2,35 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Roman_evreni_mobil.Mekanlarpage"
-             BackgroundColor="#09090b">
+             BackgroundColor="#0a0a0a">
 
-    <Grid RowDefinitions="Auto, *">
+    <Grid RowDefinitions="Auto, Auto, *">
         
-        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="15,20,15,15" BackgroundColor="#09090b">
-            <Button Text="❮ Geri" Clicked="OnGeriClicked" BackgroundColor="Transparent" TextColor="#38bdf8" FontAttributes="Bold" WidthRequest="80" HeightRequest="40" Padding="0" HorizontalOptions="Start" />
-            <Label Grid.Column="1" Text="Mekanlar" FontSize="20" FontAttributes="Bold" TextColor="#fafafa" HorizontalOptions="End" VerticalOptions="Center" />
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="20,40,20,20">
+            <Label Text="← Geri" TextColor="#737373" FontSize="16" VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="On_geri_clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <Label Grid.Column="1" Text="Mekanlar" FontSize="26" FontAttributes="Bold" TextColor="#ededed" HorizontalOptions="End" VerticalOptions="Center" FontFamily="Serif" />
         </Grid>
 
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Spacing="20" Padding="25" VerticalOptions="Start">
-                
-                <Label Text="Evrenindeki cografyayi buraya ekle." FontSize="14" TextColor="#a1a1aa" HorizontalOptions="Center" Margin="0,0,0,10" />
+        <Grid Grid.Row="1" ColumnDefinitions="*, Auto" Padding="20,10,20,30">
+            <Entry x:Name="Entry_mekanadi" Placeholder="Yeni bir mekan yaz..." PlaceholderColor="#525252" TextColor="#d4d4d4" BackgroundColor="Transparent" FontSize="18" Margin="0,0,10,0" />
+            
+            <Label Grid.Column="1" Text="+" FontSize="32" TextColor="#d4d4d4" VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="On_mekan_ekle_clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <BoxView HeightRequest="1" Color="#262626" VerticalOptions="End" Grid.ColumnSpan="2" Margin="0,0,0,-5" />
+        </Grid>
 
-                <Frame BackgroundColor="#18181b" CornerRadius="25" Padding="0" HasShadow="False" Margin="0,0,0,10">
-                    <Entry x:Name="Entry_mekanadi" Placeholder="Yeni mekan adi..." PlaceholderColor="#a1a1aa" BackgroundColor="Transparent" TextColor="#fafafa" HeightRequest="50" Margin="20,0" />
-                </Frame>
-
-                <Button Text="Listeye ekle" Clicked="OnMekanEkleClicked" BackgroundColor="#38bdf8" TextColor="#09090b" CornerRadius="25" FontAttributes="Bold" HeightRequest="50" WidthRequest="250" HorizontalOptions="Center" />
-                
-                <BoxView HeightRequest="1" Color="#27272a" Margin="0,15" />
-
-                <Label Text="Kayitli mekanlar" FontSize="16" TextColor="#a1a1aa" FontAttributes="Bold" HorizontalOptions="Start"/>
-                
-                <VerticalStackLayout x:Name="Mekan_listesi" Spacing="12" />
-                
-            </VerticalStackLayout>
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout x:Name="Mekan_listesi" Spacing="0" Padding="20,0,20,40" />
         </ScrollView>
+        
     </Grid>
 </ContentPage>
