@@ -46,7 +46,7 @@ public partial class Yapay_zeka_page : ContentPage
                     var Yeni_k = new Karakter_bilgisi {
                         Ad = Icerik[0].Trim(),
                         Dis_gorunus = Icerik.Length > 1 ? Icerik[1].Trim() : "",
-                        Hikaye = Icerik.Length > 3 ? Icerik[3].Trim() : ""
+                        Hikaye = Icerik.Length > 2 ? Icerik[2].Trim() : ""
                     };
                     Aktif_evren.Mevcut?.Karakterler.Add(Yeni_k);
                     Yeni_kayit_yapildi = true;
@@ -68,6 +68,21 @@ public partial class Yapay_zeka_page : ContentPage
                     Gosterilecek_cevap = Gosterilecek_cevap.Replace(Satir, $"✓ {Yeni_m.Ad} mekani listeye eklendi.");
                 } catch {}
             }
+            else if (Satir.Contains("[Olay_ekle:"))
+            {
+                try {
+                    var Icerik = Satir.Split("Olay_ekle:")[1].Replace("]", "").Split('|');
+                    var Yeni_o = new Olay_bilgisi {
+                        Ad = Icerik[0].Trim(),
+                        Mekanlar = Icerik.Length > 1 ? Icerik[1].Trim() : "",
+                        Karakterler = Icerik.Length > 2 ? Icerik[2].Trim() : "",
+                        Aciklama = Icerik.Length > 3 ? Icerik[3].Trim() : ""
+                    };
+                    Aktif_evren.Mevcut?.Olaylar.Add(Yeni_o);
+                    Yeni_kayit_yapildi = true;
+                    Gosterilecek_cevap = Gosterilecek_cevap.Replace(Satir, $"✓ {Yeni_o.Ad} olayi listeye eklendi.");
+                } catch {}
+            }
         }
 
         if (Yeni_kayit_yapildi)
@@ -77,6 +92,7 @@ public partial class Yapay_zeka_page : ContentPage
             if (Guncel_evren != null && Aktif_evren.Mevcut != null) {
                 Guncel_evren.Karakterler = Aktif_evren.Mevcut.Karakterler;
                 Guncel_evren.Mekanlar = Aktif_evren.Mevcut.Mekanlar;
+                Guncel_evren.Olaylar = Aktif_evren.Mevcut.Olaylar; // Olaylar listesini de JSON icine katiyoruz
                 Json_motoru.Kaydet(Tum_evrenler);
             }
         }
