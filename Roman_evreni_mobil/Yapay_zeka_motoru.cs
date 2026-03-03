@@ -8,11 +8,13 @@ namespace Roman_evreni_mobil;
 
 public static class Yapay_zeka_motoru
 {
-    private static readonly string Api_key = "AIzaSyArUY_t9wZVhwpd52yAbEhELVw5QQdqKi0"; 
+    // Kendi Api anahtarini buraya yapistir
+    private static readonly string Api_key = 
 
     public static async Task<string> Tavsiye_al(string Soru, string Evren_verisi_json)
     {
-        string Url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={Api_key}";
+        // Model adini en guncel surum olan gemini-2.0-flash olarak ayarladik
+        string Url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={Api_key}";
 
         using var Client = new HttpClient();
         
