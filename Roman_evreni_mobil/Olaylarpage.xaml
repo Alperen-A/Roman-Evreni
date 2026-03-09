@@ -2,33 +2,37 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Roman_evreni_mobil.Olaylarpage"
-             BackgroundColor="#0a0a0a"> <Grid RowDefinitions="Auto, Auto, *">
-        
-        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="20,40,20,20">
-            <Label Text="← Geri" TextColor="#737373" FontSize="16" VerticalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="On_geri_clicked" />
-                </Label.GestureRecognizers>
-            </Label>
-            
-            <Label Grid.Column="1" Text="Olay Örgüsü" FontSize="26" FontAttributes="Bold" TextColor="#ededed" HorizontalOptions="End" VerticalOptions="Center" FontFamily="Serif" />
-        </Grid>
+             BackgroundColor="#0a0a0a">
 
-        <Grid Grid.Row="1" ColumnDefinitions="*, Auto" Padding="20,10,20,30">
-            <Entry x:Name="Entry_olayadi" Placeholder="Yeni bir olay yaz..." PlaceholderColor="#525252" TextColor="#d4d4d4" BackgroundColor="Transparent" FontSize="18" Margin="0,0,10,0" />
-            
-            <Label Grid.Column="1" Text="+" FontSize="32" TextColor="#d4d4d4" VerticalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="On_olay_ekle_clicked" />
-                </Label.GestureRecognizers>
-            </Label>
-            
-            <BoxView HeightRequest="1" Color="#262626" VerticalOptions="End" Grid.ColumnSpan="2" Margin="0,0,0,-5" />
-        </Grid>
+    <Grid>
+        <Image Source="olaylar_bg.png" Aspect="AspectFill" Opacity="0.3" />
 
-        <ScrollView Grid.Row="2">
-            <VerticalStackLayout x:Name="Olay_listesi" Spacing="0" Padding="20,0,20,40" />
-        </ScrollView>
-        
+        <Grid RowDefinitions="Auto, Auto, *">
+            <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="20,40,20,20">
+                <Label Text="← Geri" TextColor="#737373" FontSize="16" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="On_geri_clicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Grid.Column="1" Text="Olaylar" FontSize="26" FontAttributes="Bold" TextColor="#ededed" HorizontalOptions="End" />
+            </Grid>
+
+            <Grid Grid.Row="1" ColumnDefinitions="*, Auto" Padding="20,10,20,30">
+                <Entry x:Name="Entry_olay_adi" 
+                       Placeholder="Yeni bir olay yaz..." 
+                       PlaceholderColor="#525252" 
+                       TextColor="#d4d4d4" 
+                       BackgroundColor="Transparent" />
+                <Label Grid.Column="1" Text="+" FontSize="32" TextColor="#d4d4d4" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="On_olay_ekle_clicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <ScrollView Grid.Row="2">
+                <VerticalStackLayout x:Name="Olay_listesi" Spacing="10" Padding="20,0,20,40" />
+            </ScrollView>
+        </Grid>
     </Grid>
 </ContentPage>

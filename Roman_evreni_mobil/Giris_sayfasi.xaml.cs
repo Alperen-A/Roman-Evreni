@@ -59,7 +59,7 @@ public partial class Giris_sayfasi : ContentPage
             tap_giris.Tapped += async (s, e) => 
             { 
                 Aktif_evren.Mevcut = evren; 
-                await Navigation.PushModalAsync(new MainPage()); 
+                await Navigation.PushModalAsync(new Mainpage()); 
             };
             isim_etiketi.GestureRecognizers.Add(tap_giris);
 

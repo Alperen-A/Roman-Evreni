@@ -1,9 +1,12 @@
-﻿namespace Roman_evreni_mobil;
+﻿using Microsoft.Maui.Controls;
 
-public partial class AppShell : Shell
+namespace Roman_evreni_mobil
 {
-	public AppShell()
-	{
-		InitializeComponent();
-	}
+    public partial class Appshell : Shell
+    {
+        public Appshell()
+        {
+            InitializeComponent();
+        }
+    }
 }

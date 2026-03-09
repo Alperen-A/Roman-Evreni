@@ -9,7 +9,7 @@ namespace Roman_evreni_mobil;
 public static class Yapay_zeka_motoru
 {
     // Kendi Api anahtarini buraya yapistir
-    private static readonly string Api_key = 
+    private static readonly string Api_key = " AIzaSyAq-xwSIQcYtMEuwL2cF6Sd3SKp0hKquJ4" ;
 
     public static async Task<string> Tavsiye_al(string Soru, string Evren_verisi_json)
     {

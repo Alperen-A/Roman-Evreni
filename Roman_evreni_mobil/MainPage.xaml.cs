@@ -1,49 +1,40 @@
 ﻿using System;
 using Microsoft.Maui.Controls;
 
-namespace Roman_evreni_mobil;
-
-public partial class MainPage : ContentPage
+namespace Roman_evreni_mobil
 {
-    public MainPage()
+    public partial class Mainpage : ContentPage
     {
-        InitializeComponent();
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        
-        // Ismi tasarimla ayni olacak sekilde kucuk harfe cevirdik
-        if (Aktif_evren.Mevcut != null)
+        public Mainpage()
         {
-            Lbl_evrenadi.Text = "🌌 " + Aktif_evren.Mevcut.Evren_adi;
+            InitializeComponent();
         }
-    }
+        
 
-    private async void OnKarakterlerClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushModalAsync(new Karakterlerpage());
-    }
+        private async void On_kayit_clicked(object sender, EventArgs e)
+        {
+            // Shell yapisi ile kayit sayfasina gidiyoruz
+            await Shell.Current.GoToAsync("Kayitpage"); 
+        }
 
-    // Buraya async kelimesini ekledik
-    private async void OnMekanlarClicked(object sender, EventArgs e)
-    {
-        // Sonuna noktali virgul eklendi
-        await Navigation.PushModalAsync(new Mekanlarpage());
-    }
+        private async void On_karakterler_clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("Karakterlerpage");
+        }
 
-   private async void OnOlaylarClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushModalAsync(new Olaylarpage());
-    }
+        private async void On_mekanlar_clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("Mekanlarpage");
+        }
 
-    private async void OnGeriClicked(object sender, EventArgs e)
-    {
-        await Navigation.PopModalAsync();
-    }
-    private async void On_asistan_clicked(object sender, EventArgs e)
-    {
-        await Navigation.PushModalAsync(new Yapay_zeka_page());
+        private async void On_olaylar_clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("Olaylarpage");
+        }
+
+        private void On_asistan_clicked(object sender, EventArgs e)
+        {
+            // Asistan kodlari buraya gelecek
+        }
     }
 }
