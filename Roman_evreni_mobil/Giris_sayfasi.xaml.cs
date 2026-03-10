@@ -20,7 +20,6 @@ public partial class Giris_sayfasi : ContentPage
         base.OnAppearing();
         Evrenleri_yukle_ve_ciz();
         
-        // Siyah ekranda yazilarin zarifce belirmesini saglayan animasyon
         await Main_kutu.FadeTo(1, 800); 
     }
 
@@ -33,6 +32,8 @@ public partial class Giris_sayfasi : ContentPage
 
         foreach (var evren in _tum_evrenler)
         {
+            var secilen_evren = evren; // closure hatasını önlemek için yerel kopya
+
             var dikey_kutu = new VerticalStackLayout();
             
             var yatay_kutu = new Grid 
@@ -45,10 +46,9 @@ public partial class Giris_sayfasi : ContentPage
                 Padding = new Thickness(0, 15) 
             };
 
-            // Evren adi etiketi (Zarif Serif font)
             var isim_etiketi = new Label 
             { 
-                Text = evren.Evren_adi, 
+                Text = secilen_evren.Evren_adi, 
                 TextColor = Color.FromArgb("#a3a3a3"), 
                 FontSize = 20, 
                 FontFamily = "Serif", 
@@ -58,12 +58,11 @@ public partial class Giris_sayfasi : ContentPage
             var tap_giris = new TapGestureRecognizer();
             tap_giris.Tapped += async (s, e) => 
             { 
-                Aktif_evren.Mevcut = evren; 
+                Aktif_evren.Mevcut = secilen_evren; 
                 await Navigation.PushModalAsync(new Mainpage()); 
             };
             isim_etiketi.GestureRecognizers.Add(tap_giris);
 
-            // Silme butonu yerine zarif bir carpi isareti
             var sil_butonu = new Label 
             { 
                 Text = "✕", 
@@ -76,10 +75,10 @@ public partial class Giris_sayfasi : ContentPage
             var tap_sil = new TapGestureRecognizer();
             tap_sil.Tapped += async (s, e) => 
             {
-                bool onay = await DisplayAlert("Uyarı", $"{evren.Evren_adi} silinsin mi?", "Evet", "Hayır");
+                bool onay = await DisplayAlert("Uyarı", $"{secilen_evren.Evren_adi} silinsin mi?", "Evet", "Hayır");
                 if(onay) 
                 { 
-                    _tum_evrenler.Remove(evren); 
+                    _tum_evrenler.Remove(secilen_evren); 
                     Json_motoru.Kaydet(_tum_evrenler); 
                     Evrenleri_yukle_ve_ciz(); 
                 }
@@ -90,15 +89,12 @@ public partial class Giris_sayfasi : ContentPage
             yatay_kutu.Add(sil_butonu, 1, 0);
             
             dikey_kutu.Children.Add(yatay_kutu);
-            
-            // Incecik alt ayrac
             dikey_kutu.Children.Add(new BoxView { HeightRequest = 1, Color = Color.FromArgb("#171717") });
             
             Evrenler_listesi.Children.Add(dikey_kutu);
         }
     }
 
-    // Yeni ekledigimiz arti (+) isaretine tiklama motoru
     private void On_evren_olustur_clicked(object sender, EventArgs e)
     {
         string? yeni_ad = Entry_yeni_evren.Text?.Trim();

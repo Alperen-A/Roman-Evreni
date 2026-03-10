@@ -5,16 +5,35 @@
              BackgroundColor="#0a0a0a">
 
     <Grid>
-        <Image Source="giris_bg.jpg" Aspect="AspectFill" Opacity="0.6" />
+        <Image Source="giris_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
 
         <Grid RowDefinitions="Auto, *">
-            <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="20,40,20,20">
-                <Label Text="+ Kayit" TextColor="#737373" FontSize="16" VerticalOptions="Center">
+            <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="20,40,20,20">
+
+                <!-- Geri butonu -->
+                <Label Text="← Geri" TextColor="#737373" FontSize="16" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="On_geri_clicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <!-- Evren adı ortada -->
+                <Label x:Name="Evren_adi_label"
+                       Grid.Column="1" 
+                       Text="Evren" 
+                       FontSize="26" 
+                       FontAttributes="Bold" 
+                       FontFamily="Serif"
+                       TextColor="#ededed" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+
+                <!-- Kayıt butonu -->
+                <Label Grid.Column="2" Text="+ Kayıt" TextColor="#737373" FontSize="16" VerticalOptions="Center">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="On_kayit_clicked" />
                     </Label.GestureRecognizers>
                 </Label>
-                <Label Grid.Column="1" Text="Evren" FontSize="26" FontAttributes="Bold" TextColor="#ededed" HorizontalOptions="End" />
             </Grid>
 
             <VerticalStackLayout Grid.Row="1" Padding="20,20,20,40" Spacing="25">
