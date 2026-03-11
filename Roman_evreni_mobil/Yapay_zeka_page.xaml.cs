@@ -101,18 +101,18 @@ public partial class Yapay_zeka_page : ContentPage
     }
 
     private void Ekrana_mesaj_ekle(string Mesaj, bool Kullanici_mi)
+{
+    var Etiket = new Label
     {
-        var Etiket = new Label
-        {
-            Text = Mesaj,
-            TextColor = Kullanici_mi ? Color.FromArgb("#d4d4d4") : Color.FromArgb("#a3a3a3"),
-            FontSize = 16,
-            FontFamily = "Serif",
-            Margin = new Thickness(Kullanici_mi ? 40 : 0, 0, Kullanici_mi ? 0 : 40, 10),
-            HorizontalOptions = Kullanici_mi ? LayoutOptions.End : LayoutOptions.Start
-        };
-        Sohbet_kutusu.Children.Add(Etiket);
-    }
+        Text = Mesaj,
+        TextColor = Kullanici_mi ? Color.FromArgb("#ffffff") : Color.FromArgb("#e0e0e0"),
+        FontSize = 16,
+        FontFamily = "Serif",
+        Margin = new Thickness(Kullanici_mi ? 40 : 0, 0, Kullanici_mi ? 0 : 40, 10),
+        HorizontalOptions = Kullanici_mi ? LayoutOptions.End : LayoutOptions.Start
+    };
+    Sohbet_kutusu.Children.Add(Etiket);
+}
 
     private async void On_geri_clicked(object Sender, EventArgs E)
     {

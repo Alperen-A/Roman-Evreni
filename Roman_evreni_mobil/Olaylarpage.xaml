@@ -9,21 +9,21 @@
 
         <Grid RowDefinitions="Auto, Auto, *">
             <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="20,40,20,20">
-                <Label Text="← Geri" TextColor="#737373" FontSize="16" VerticalOptions="Center">
+                <Label Text="← Geri" TextColor="#ffffff" FontSize="16" VerticalOptions="Center">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="On_geri_clicked" />
                     </Label.GestureRecognizers>
                 </Label>
-                <Label Grid.Column="1" Text="Olaylar" FontSize="26" FontAttributes="Bold" TextColor="#ededed" HorizontalOptions="End" />
+                <Label Grid.Column="1" Text="Olaylar" FontSize="26" FontAttributes="Bold" TextColor="#ffffff" HorizontalOptions="End" />
             </Grid>
 
             <Grid Grid.Row="1" ColumnDefinitions="*, Auto" Padding="20,10,20,30">
                 <Entry x:Name="Entry_olay_adi" 
                        Placeholder="Yeni bir olay yaz..." 
-                       PlaceholderColor="#525252" 
-                       TextColor="#d4d4d4" 
+                       PlaceholderColor="#a3a3a3" 
+                       TextColor="#ffffff" 
                        BackgroundColor="Transparent" />
-                <Label Grid.Column="1" Text="+" FontSize="32" TextColor="#d4d4d4" VerticalOptions="Center">
+                <Label Grid.Column="1" Text="+" FontSize="32" TextColor="#ffffff" VerticalOptions="Center">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="On_olay_ekle_clicked" />
                     </Label.GestureRecognizers>
