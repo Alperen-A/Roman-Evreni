@@ -5,7 +5,7 @@
              BackgroundColor="#0a0a0a">
 
     <Grid>
-        <Image Source="giris_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
+        <Image Source="romanlar_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
 
         <Grid RowDefinitions="Auto, Auto, *">
             <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="20,40,20,20">
