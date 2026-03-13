@@ -66,14 +66,20 @@ public partial class Karakterlerpage : ContentPage
             Padding = new Thickness(0, 15) 
         };
 
-        var isim_etiketi = new Label 
-        { 
-            Text = karakter.Ad, 
-           TextColor = Color.FromArgb("#f5f5f5"),
-            FontSize = 18,
-            FontFamily = "Serif",
-            VerticalOptions = LayoutOptions.Center 
+       var isim_etiketi = new Label 
+    { 
+         Text = karakter.Ad, 
+      TextColor = Color.FromArgb("#f5f5f5"), 
+      FontSize = 18,
+      FontFamily = "Serif",
+      VerticalOptions = LayoutOptions.Center 
         };
+       var tap_isim = new TapGestureRecognizer();
+      tap_isim.Tapped += async (s, e) =>
+        {
+    await Navigation.PushModalAsync(new Karakter_detay_page(karakter));
+};
+isim_etiketi.GestureRecognizers.Add(tap_isim);
 
         var detay_butonu = new Label
         {

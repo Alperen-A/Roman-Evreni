@@ -67,13 +67,19 @@ public partial class Mekanlarpage : ContentPage
         };
 
         var isim_etiketi = new Label 
-        { 
-            Text = mekan.Ad, 
-            TextColor = Color.FromArgb("#f5f5f5"), 
-            FontSize = 18,
-            FontFamily = "Serif",
-            VerticalOptions = LayoutOptions.Center 
-        };
+{ 
+    Text = mekan.Ad, 
+    TextColor = Color.FromArgb("#f5f5f5"), 
+    FontSize = 18,
+    FontFamily = "Serif",
+    VerticalOptions = LayoutOptions.Center 
+    };
+    var tap_isim = new TapGestureRecognizer();
+    tap_isim.Tapped += async (s, e) =>
+    {
+    await Navigation.PushModalAsync(new Mekan_detay_page(mekan));
+    };
+    isim_etiketi.GestureRecognizers.Add(tap_isim);
 
         var detay_butonu = new Label
         {

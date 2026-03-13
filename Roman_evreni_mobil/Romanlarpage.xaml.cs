@@ -5,52 +5,43 @@ using Microsoft.Maui.Graphics;
 
 namespace Roman_evreni_mobil;
 
-public partial class Olaylarpage : ContentPage
+public partial class Romanlarpage : ContentPage
 {
-    public Olaylarpage()
+    public Romanlarpage()
     {
         InitializeComponent();
-        Olaylari_yukle();
+        Romanlari_yukle();
     }
 
-    private void Olaylari_yukle()
+    private void Romanlari_yukle()
     {
-        Olay_listesi.Children.Clear();
+        Roman_listesi.Children.Clear();
 
-        if (Aktif_evren.Mevcut != null && Aktif_evren.Mevcut.Olaylar != null)
+        if (Aktif_evren.Mevcut?.Romanlar != null)
         {
-            foreach (var o in Aktif_evren.Mevcut.Olaylar)
+            foreach (var roman in Aktif_evren.Mevcut.Romanlar)
             {
-                Ekrana_olay_ekle(o);
+                Ekrana_roman_ekle(roman);
             }
         }
     }
 
-    private void On_olay_ekle_clicked(object sender, EventArgs e)
+    private void On_roman_ekle_clicked(object sender, EventArgs e)
     {
-        string? yeni_ad = Entry_olay_adi.Text?.Trim();
+        string? yeni_ad = Entry_roman_adi.Text?.Trim();
 
         if (!string.IsNullOrWhiteSpace(yeni_ad) && Aktif_evren.Mevcut != null)
         {
-            var yeni_olay = new Olay_bilgisi { Ad = yeni_ad };
+            var yeni_roman = new Roman { Ad = yeni_ad };
 
-            Ekrana_olay_ekle(yeni_olay);
-            Aktif_evren.Mevcut.Olaylar.Add(yeni_olay);
-
-            var tum_evrenler = Json_motoru.Yukle();
-            var guncellenecek_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut.Evren_adi);
-
-            if (guncellenecek_evren != null)
-            {
-                guncellenecek_evren.Olaylar = Aktif_evren.Mevcut.Olaylar;
-                Json_motoru.Kaydet(tum_evrenler);
-            }
-
-            Entry_olay_adi.Text = string.Empty;
+            Aktif_evren.Mevcut.Romanlar.Add(yeni_roman);
+            Kaydet();
+            Ekrana_roman_ekle(yeni_roman);
+            Entry_roman_adi.Text = string.Empty;
         }
     }
 
-    private void Ekrana_olay_ekle(Olay_bilgisi olay)
+    private void Ekrana_roman_ekle(Roman roman)
     {
         var dikey_kutu = new VerticalStackLayout();
 
@@ -67,7 +58,7 @@ public partial class Olaylarpage : ContentPage
 
        var isim_etiketi = new Label
 {
-    Text = olay.Ad,
+    Text = roman.Ad,
     TextColor = Color.FromArgb("#f5f5f5"),
     FontSize = 18,
     FontFamily = "Serif",
@@ -76,10 +67,9 @@ public partial class Olaylarpage : ContentPage
 var tap_isim = new TapGestureRecognizer();
 tap_isim.Tapped += async (s, e) =>
 {
-    await Navigation.PushModalAsync(new Olay_detay_page(olay));
+    await Navigation.PushModalAsync(new Roman_detay_page(roman));
 };
 isim_etiketi.GestureRecognizers.Add(tap_isim);
-
         var detay_butonu = new Label
         {
             Text = "→",
@@ -91,7 +81,7 @@ isim_etiketi.GestureRecognizers.Add(tap_isim);
         var tap_detay = new TapGestureRecognizer();
         tap_detay.Tapped += async (s, e) =>
         {
-            await Navigation.PushModalAsync(new Olay_detay_page(olay));
+            await Navigation.PushModalAsync(new Roman_detay_page(roman));
         };
         detay_butonu.GestureRecognizers.Add(tap_detay);
 
@@ -104,17 +94,15 @@ isim_etiketi.GestureRecognizers.Add(tap_isim);
             Padding = new Thickness(10, 0, 0, 0)
         };
         var tap_sil = new TapGestureRecognizer();
-        tap_sil.Tapped += (s, e) =>
+        tap_sil.Tapped += async (s, e) =>
         {
-            Aktif_evren.Mevcut?.Olaylar.Remove(olay);
-            var tum_evrenler = Json_motoru.Yukle();
-            var guncel_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
-            if (guncel_evren != null && Aktif_evren.Mevcut != null)
+            bool onay = await DisplayAlert("Uyarı", $"{roman.Ad} silinsin mi?", "Evet", "Hayır");
+            if (onay)
             {
-                guncel_evren.Olaylar = Aktif_evren.Mevcut.Olaylar;
-                Json_motoru.Kaydet(tum_evrenler);
+                Aktif_evren.Mevcut?.Romanlar.Remove(roman);
+                Kaydet();
+                Roman_listesi.Children.Remove(dikey_kutu);
             }
-            Olay_listesi.Children.Remove(dikey_kutu);
         };
         sil_butonu.GestureRecognizers.Add(tap_sil);
 
@@ -125,7 +113,18 @@ isim_etiketi.GestureRecognizers.Add(tap_isim);
         dikey_kutu.Children.Add(yatay_kutu);
         dikey_kutu.Children.Add(new BoxView { HeightRequest = 1, Color = Color.FromArgb("#171717") });
 
-        Olay_listesi.Children.Add(dikey_kutu);
+        Roman_listesi.Children.Add(dikey_kutu);
+    }
+
+    private void Kaydet()
+    {
+        var tum_evrenler = Json_motoru.Yukle();
+        var guncel = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
+        if (guncel != null && Aktif_evren.Mevcut != null)
+        {
+            guncel.Romanlar = Aktif_evren.Mevcut.Romanlar;
+            Json_motoru.Kaydet(tum_evrenler);
+        }
     }
 
     private async void On_geri_clicked(object sender, EventArgs e)
