@@ -10,14 +10,13 @@ namespace Roman_evreni_mobil
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            if (Aktif_evren.Mevcut != null)
-                Evren_adi_label.Text = Aktif_evren.Mevcut.Evren_adi;
-        }
-
-        private async void On_geri_clicked(object sender, EventArgs e)
+       protected override async void OnAppearing()
+{
+    base.OnAppearing();
+    if (Aktif_evren.Mevcut != null)
+        Evren_adi_label.Text = Aktif_evren.Mevcut.Evren_adi;
+    await Ana_kutu.FadeTo(1, 300);
+}        private async void On_geri_clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
         }

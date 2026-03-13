@@ -70,6 +70,13 @@ public partial class Roman_detay_page : ContentPage
             VerticalOptions = LayoutOptions.Center
         };
 
+        var tap_baslik = new TapGestureRecognizer();
+          tap_baslik.Tapped += async (s, e) =>
+{
+        await Navigation.PushModalAsync(new Bolum_detay_page(bolum, _roman));
+};
+         baslik_etiketi.GestureRecognizers.Add(tap_baslik);
+
         var detay_butonu = new Label
         {
             Text = "→",

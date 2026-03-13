@@ -4,36 +4,257 @@
              x:Class="Roman_evreni_mobil.Not_detay_page"
              BackgroundColor="#0a0a0a">
 
-    <Grid x:Name="Ana_kutu" Opacity="0" RowDefinitions="Auto, Auto, *">
-       <Grid RowDefinitions="Auto, Auto, *">
-    <Image Grid.RowSpan="3" Source="notlar_ici_bg.jpeg" Aspect="AspectFill" Opacity="0.4" />
-    
+    <Grid x:Name="Ana_kutu" Opacity="0" RowDefinitions="Auto, Auto, Auto, *, Auto">
+        <Image Grid.RowSpan="5" Source="notlar_ici_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
+
+        <!-- Üst bar -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto, Auto" Padding="20,40,20,15">
             <Label Text="← Geri" TextColor="#f5f5f5" FontSize="16" VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="On_geri_clicked" />
                 </Label.GestureRecognizers>
             </Label>
-            <Label x:Name="Not_baslik_label" Grid.Column="1" Text="" FontSize="20" FontAttributes="Bold" TextColor="#f5f5f5" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Serif" />
-            <Label Grid.Column="2" Text="Kaydet" TextColor="#f5f5f5" FontSize="16" FontAttributes="Bold" VerticalOptions="Center">
+            <Label x:Name="Not_baslik_label" Grid.Column="1" Text="" FontSize="20" 
+                   FontAttributes="Bold" TextColor="#f5f5f5" 
+                   HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Serif" />
+            <Label x:Name="Mod_label" Grid.Column="2" Text="👁" FontSize="20" 
+                   VerticalOptions="Center" Padding="10,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="On_mod_degistir_clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="3" Text="Kaydet" TextColor="#f5f5f5" FontSize="16" 
+                   FontAttributes="Bold" VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="On_kaydet_clicked" />
                 </Label.GestureRecognizers>
             </Label>
         </Grid>
 
-        <Label x:Name="Kelime_sayaci" Grid.Row="1" TextColor="#525252" FontSize="12" Padding="20,0,20,10" />
+        <!-- Kelime sayacı -->
+        <Label x:Name="Kelime_sayaci" Grid.Row="1" TextColor="#525252" FontSize="12" Padding="20,0,20,5" />
 
-        <ScrollView Grid.Row="2">
+        <!-- Araç çubuğu -->
+        <ScrollView Grid.Row="2" Orientation="Horizontal" HorizontalScrollBarVisibility="Always" 
+                    x:Name="Arac_cubugu_scroll">
+            <HorizontalStackLayout x:Name="Arac_cubugu" Padding="15,8" Spacing="4">
+
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,6,0">
+                    <Label Text="↩" FontSize="16" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_geri_al_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,10,0">
+                    <Label Text="↪" FontSize="16" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_yeniden_yap_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="B" FontSize="16" TextColor="#f5f5f5" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_kalin_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="I" FontSize="16" TextColor="#f5f5f5" FontAttributes="Italic">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_italik_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,10,0">
+                    <Label Text="U̲" FontSize="16" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_alti_cizili_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="H1" FontSize="16" TextColor="#f5f5f5" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_h1_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,10,0">
+                    <Label Text="H2" FontSize="14" TextColor="#f5f5f5" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_h2_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="A-" FontSize="14" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_kucuk_font_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,10,0">
+                    <Label Text="A+" FontSize="18" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_buyuk_font_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="≡←" FontSize="14" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_sola_hizala_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="≡≡" FontSize="14" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_ortaya_hizala_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,10,0">
+                    <Label Text="≡→" FontSize="14" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_saga_hizala_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="• Liste" FontSize="14" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_madde_liste_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="1. Liste" FontSize="14" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_numarali_liste_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,10,0">
+                    <Label Text="☐ Görev" FontSize="14" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_gorev_liste_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Border BackgroundColor="#ef4444" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="A" FontSize="16" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_renk_kirmizi_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#3b82f6" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="A" FontSize="16" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_renk_mavi_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#22c55e" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="A" FontSize="16" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_renk_yesil_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#eab308" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="A" FontSize="16" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_renk_sari_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#a855f7" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,10,0">
+                    <Label Text="A" FontSize="16" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_renk_mor_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="❝" FontSize="16" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_alinti_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="—" FontSize="16" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_ayrac_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1a1a1a" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,10,0">
+                    <Label Text="📅" FontSize="16" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_tarih_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+                <Border BackgroundColor="#0a0a0a" Stroke="#333" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="🌑" FontSize="16" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_arkaplan_koyu_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#1c1510" Stroke="#333" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="🌿" FontSize="16" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_arkaplan_krem_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+                <Border BackgroundColor="#0f172a" Stroke="#333" StrokeShape="RoundRectangle" Padding="10,6" Margin="0,0,4,0">
+                    <Label Text="🌊" FontSize="16" TextColor="#f5f5f5">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="On_arkaplan_lacivert_clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Border>
+
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <ScrollView Grid.Row="3" x:Name="Duzenle_scroll">
             <Editor x:Name="Editor_icerik"
-                    Placeholder="Notunu yaz..."
+                    Placeholder="Notunu yaz... (markdown desteklenir)"
                     PlaceholderColor="#525252"
                     TextColor="#f5f5f5"
                     BackgroundColor="Transparent"
                     FontSize="16"
                     FontFamily="Serif"
                     AutoSize="TextChanges"
-                    Margin="20,0,20,40"
+                    Margin="20,10,20,40"
                     TextChanged="On_metin_degisti" />
         </ScrollView>
+
+        <ScrollView Grid.Row="3" x:Name="Onizleme_scroll" IsVisible="False">
+            <VerticalStackLayout x:Name="Onizleme_kutusu" Padding="20,10,20,40" Spacing="4" />
+        </ScrollView>
+
+        <Grid Grid.Row="4" ColumnDefinitions="*, Auto" Padding="20,8,20,20">
+            <Label x:Name="Son_kayit_label" TextColor="#525252" FontSize="11" VerticalOptions="Center" />
+            <Label Grid.Column="1" x:Name="Mod_gostergesi" Text="✏️ Düzenleme" 
+                   TextColor="#525252" FontSize="11" VerticalOptions="Center" />
+        </Grid>
+
     </Grid>
 </ContentPage>

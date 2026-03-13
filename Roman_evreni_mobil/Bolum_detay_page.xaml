@@ -5,6 +5,7 @@
              BackgroundColor="#0a0a0a">
 
     <Grid x:Name="Ana_kutu" Opacity="0" RowDefinitions="Auto, Auto, *">
+        <Image Grid.RowSpan="3" Source="bolum_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
         <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="20,40,20,20">
             <Label Text="← Geri" TextColor="#f5f5f5" FontSize="16" VerticalOptions="Center">
                 <Label.GestureRecognizers>
