@@ -4,7 +4,7 @@
              x:Class="Roman_evreni_mobil.Notlarpage"
              BackgroundColor="#0a0a0a">
 
-    <Grid>
+    <Grid x:Name="Ana_kutu" Opacity="0">
         <Image Source="notlar_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
 
         <Grid RowDefinitions="Auto, Auto, *">

@@ -16,12 +16,12 @@ public partial class Giris_sayfasi : ContentPage
     }
 
     protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        Evrenleri_yukle_ve_ciz();
-        
-        await Main_kutu.FadeTo(1, 800); 
-    }
+{
+    base.OnAppearing();
+    Evrenleri_yukle_ve_ciz();
+    if (Main_kutu.Opacity < 1)
+        await Main_kutu.FadeTo(1, 800);
+}
 
     private void Evrenleri_yukle_ve_ciz()
     {

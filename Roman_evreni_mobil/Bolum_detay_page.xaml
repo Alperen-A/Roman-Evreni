@@ -4,7 +4,7 @@
              x:Class="Roman_evreni_mobil.Bolum_detay_page"
              BackgroundColor="#0a0a0a">
 
-    <Grid RowDefinitions="Auto, Auto, *">
+    <Grid x:Name="Ana_kutu" Opacity="0" RowDefinitions="Auto, Auto, *">
         <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="20,40,20,20">
             <Label Text="← Geri" TextColor="#f5f5f5" FontSize="16" VerticalOptions="Center">
                 <Label.GestureRecognizers>

@@ -17,6 +17,12 @@ public partial class Roman_detay_page : ContentPage
         Bolumleri_yukle();
     }
 
+    protected override async void OnAppearing()
+{
+    base.OnAppearing();
+    await Ana_kutu.FadeTo(1, 300);
+}
+
     private void Bolumleri_yukle()
     {
         Bolum_listesi.Children.Clear();

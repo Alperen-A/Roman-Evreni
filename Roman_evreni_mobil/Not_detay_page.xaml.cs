@@ -25,6 +25,12 @@ public partial class Not_detay_page : ContentPage
     Kelime_sayacini_guncelle(_not.Icerik);
 }
 
+protected override async void OnAppearing()
+{
+    base.OnAppearing();
+    await Ana_kutu.FadeTo(1, 300);
+}
+
     private void On_metin_degisti(object sender, TextChangedEventArgs e)
     {
         Kelime_sayacini_guncelle(e.NewTextValue);

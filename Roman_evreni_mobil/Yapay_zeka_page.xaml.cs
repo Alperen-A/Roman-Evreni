@@ -16,6 +16,12 @@ public partial class Yapay_zeka_page : ContentPage
         InitializeComponent();
     }
 
+    protected override async void OnAppearing()
+{
+    base.OnAppearing();
+    await Ana_kutu.FadeTo(1, 300);
+}
+
     private void On_analiz_mod_clicked(object sender, EventArgs e)
     {
         _roman_yaz_modu = false;

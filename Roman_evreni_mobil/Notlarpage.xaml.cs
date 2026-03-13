@@ -13,6 +13,12 @@ public partial class Notlarpage : ContentPage
         Notlari_yukle();
     }
 
+    protected override async void OnAppearing()
+{
+    base.OnAppearing();
+    await Ana_kutu.FadeTo(1, 300);
+}
+
     private void Notlari_yukle()
     {
         Not_listesi.Children.Clear();

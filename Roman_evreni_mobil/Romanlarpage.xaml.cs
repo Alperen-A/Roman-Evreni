@@ -13,6 +13,12 @@ public partial class Romanlarpage : ContentPage
         Romanlari_yukle();
     }
 
+    protected override async void OnAppearing()
+{
+    base.OnAppearing();
+    await Ana_kutu.FadeTo(1, 300);
+}
+
     private void Romanlari_yukle()
     {
         Roman_listesi.Children.Clear();
