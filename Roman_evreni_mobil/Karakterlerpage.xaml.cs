@@ -69,7 +69,7 @@ public partial class Karakterlerpage : ContentPage
         var isim_etiketi = new Label 
         { 
             Text = karakter.Ad, 
-            TextColor = Color.FromArgb("#a3a3a3"), 
+           TextColor = Color.FromArgb("#f5f5f5"),
             FontSize = 18,
             FontFamily = "Serif",
             VerticalOptions = LayoutOptions.Center 

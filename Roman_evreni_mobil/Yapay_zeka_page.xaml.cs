@@ -72,12 +72,10 @@ public partial class Yapay_zeka_page : ContentPage
             {
                 try {
                     var Icerik = Satir.Split("Olay_ekle:")[1].Replace("]", "").Split('|');
-                    var Yeni_o = new Olay_bilgisi {
-                        Ad = Icerik[0].Trim(),
-                        Mekanlar = Icerik.Length > 1 ? Icerik[1].Trim() : "",
-                        Karakterler = Icerik.Length > 2 ? Icerik[2].Trim() : "",
-                        Aciklama = Icerik.Length > 3 ? Icerik[3].Trim() : ""
-                    };
+                   var Yeni_o = new Olay_bilgisi {
+                   Ad = Icerik[0].Trim(),
+                   Aciklama = Icerik.Length > 3 ? Icerik[3].Trim() : ""
+                  };
                     Aktif_evren.Mevcut?.Olaylar.Add(Yeni_o);
                     Yeni_kayit_yapildi = true;
                     Gosterilecek_cevap = Gosterilecek_cevap.Replace(Satir, $"✓ {Yeni_o.Ad} olayi listeye eklendi.");

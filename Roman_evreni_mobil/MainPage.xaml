@@ -3,51 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Roman_evreni_mobil.Mainpage"
              BackgroundColor="#0a0a0a">
-
     <Grid>
         <Image Source="giris_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
-
         <Grid RowDefinitions="Auto, *">
             <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="20,40,20,20">
-
-                <!-- Geri butonu -->
-                <Label Text="← Geri" TextColor="#737373" FontSize="16" VerticalOptions="Center">
+                <Label Text="← Geri" TextColor="#f5f5f5" FontSize="16" VerticalOptions="Center">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="On_geri_clicked" />
                     </Label.GestureRecognizers>
                 </Label>
-
-                <!-- Evren adı ortada -->
-                <Label x:Name="Evren_adi_label"
-                       Grid.Column="1" 
-                       Text="Evren" 
-                       FontSize="26" 
-                       FontAttributes="Bold" 
-                       FontFamily="Serif"
-                       TextColor="#ededed" 
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center" />
-
-                <!-- Kayıt butonu -->
-                <Label Grid.Column="2" Text="+ Kayıt" TextColor="#737373" FontSize="16" VerticalOptions="Center">
+                <Label x:Name="Evren_adi_label" Grid.Column="1" Text="Evren" FontSize="26" FontAttributes="Bold" FontFamily="Serif" TextColor="#f5f5f5" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Grid.Column="2" Text="+ Kayıt" TextColor="#f5f5f5" FontSize="16" VerticalOptions="Center">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="On_kayit_clicked" />
                     </Label.GestureRecognizers>
                 </Label>
             </Grid>
-
             <VerticalStackLayout Grid.Row="1" Padding="20,20,20,40" Spacing="25">
-                <Button Text="Karakterler" Clicked="On_karakterler_clicked" BackgroundColor="Transparent" TextColor="#a3a3a3" FontSize="22" HorizontalOptions="Start" />
-                <BoxView HeightRequest="1" Color="#171717" />
-
-                <Button Text="Mekanlar" Clicked="On_mekanlar_clicked" BackgroundColor="Transparent" TextColor="#a3a3a3" FontSize="22" HorizontalOptions="Start" />
-                <BoxView HeightRequest="1" Color="#171717" />
-
-                <Button Text="Olay orgusu" Clicked="On_olaylar_clicked" BackgroundColor="Transparent" TextColor="#a3a3a3" FontSize="22" HorizontalOptions="Start" />
-                <BoxView HeightRequest="1" Color="#171717" />
-
-                <Button Text="Yapay zeka asistan" Clicked="On_asistan_clicked" BackgroundColor="Transparent" TextColor="#a3a3a3" FontSize="22" HorizontalOptions="Start" />
-                <BoxView HeightRequest="1" Color="#171717" />
+                <Button Text="Karakterler" Clicked="On_karakterler_clicked" BackgroundColor="Transparent" TextColor="#f5f5f5" FontSize="22" HorizontalOptions="Start" />
+                <BoxView HeightRequest="1" Color="#262626" />
+                <Button Text="Mekanlar" Clicked="On_mekanlar_clicked" BackgroundColor="Transparent" TextColor="#f5f5f5" FontSize="22" HorizontalOptions="Start" />
+                <BoxView HeightRequest="1" Color="#262626" />
+                <Button Text="Olay orgusu" Clicked="On_olaylar_clicked" BackgroundColor="Transparent" TextColor="#f5f5f5" FontSize="22" HorizontalOptions="Start" />
+                <BoxView HeightRequest="1" Color="#262626" />
+                <Button Text="Yapay zeka asistan" Clicked="On_asistan_clicked" BackgroundColor="Transparent" TextColor="#f5f5f5" FontSize="22" HorizontalOptions="Start" />
+                <BoxView HeightRequest="1" Color="#262626" />
             </VerticalStackLayout>
         </Grid>
     </Grid>

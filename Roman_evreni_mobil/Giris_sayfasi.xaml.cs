@@ -49,7 +49,7 @@ public partial class Giris_sayfasi : ContentPage
             var isim_etiketi = new Label 
             { 
                 Text = secilen_evren.Evren_adi, 
-                TextColor = Color.FromArgb("#a3a3a3"), 
+                TextColor = Color.FromArgb("#f5f5f5"),
                 FontSize = 20, 
                 FontFamily = "Serif", 
                 VerticalOptions = LayoutOptions.Center 
@@ -66,7 +66,7 @@ public partial class Giris_sayfasi : ContentPage
             var sil_butonu = new Label 
             { 
                 Text = "✕", 
-                TextColor = Color.FromArgb("#525252"), 
+                TextColor = Color.FromArgb("#737373"), 
                 FontSize = 18, 
                 VerticalOptions = LayoutOptions.Center, 
                 Padding = new Thickness(15, 0, 0, 0) 

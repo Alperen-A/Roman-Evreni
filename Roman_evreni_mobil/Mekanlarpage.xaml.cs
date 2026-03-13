@@ -69,7 +69,7 @@ public partial class Mekanlarpage : ContentPage
         var isim_etiketi = new Label 
         { 
             Text = mekan.Ad, 
-            TextColor = Color.FromArgb("#a3a3a3"), 
+            TextColor = Color.FromArgb("#f5f5f5"), 
             FontSize = 18,
             FontFamily = "Serif",
             VerticalOptions = LayoutOptions.Center 

@@ -3,30 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Roman_evreni_mobil.Giris_sayfasi"
              BackgroundColor="#0a0a0a">
-
     <Grid x:Name="Main_kutu" Opacity="0">
         <Image Source="ilk_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
-
         <Grid RowDefinitions="Auto, *">
             <Grid Grid.Row="0" ColumnDefinitions="*, Auto" Padding="20,50,20,20">
-                <Label Text="Roman Evreni" 
-                       FontSize="28" FontAttributes="Bold" FontFamily="Serif"
-                       TextColor="#ededed" VerticalOptions="Center" />
+                <Label Text="Roman Evreni" FontSize="28" FontAttributes="Bold" FontFamily="Serif" TextColor="#f5f5f5" VerticalOptions="Center" />
             </Grid>
-
             <Grid Grid.Row="1" RowDefinitions="Auto, *">
                 <Grid Grid.Row="0" ColumnDefinitions="*, Auto" Padding="20,0,20,20">
-                    <Entry x:Name="Entry_yeni_evren" 
-                           Placeholder="Yeni bir evren yarat..." 
-                           PlaceholderColor="#525252" TextColor="#d4d4d4" 
-                           BackgroundColor="Transparent" FontSize="16" />
-                    <Label Grid.Column="1" Text="+" FontSize="36" TextColor="#d4d4d4" VerticalOptions="Center">
+                    <Entry x:Name="Entry_yeni_evren" Placeholder="Yeni bir evren yarat..." PlaceholderColor="#737373" TextColor="#f5f5f5" BackgroundColor="Transparent" FontSize="16" />
+                    <Label Grid.Column="1" Text="+" FontSize="36" TextColor="#f5f5f5" VerticalOptions="Center">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="On_evren_olustur_clicked" />
                         </Label.GestureRecognizers>
                     </Label>
                 </Grid>
-
                 <ScrollView Grid.Row="1">
                     <VerticalStackLayout x:Name="Evrenler_listesi" Spacing="0" Padding="20,0,20,40" />
                 </ScrollView>
