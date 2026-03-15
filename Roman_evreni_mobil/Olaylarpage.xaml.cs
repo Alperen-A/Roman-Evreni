@@ -124,7 +124,12 @@ isim_etiketi.GestureRecognizers.Add(tap_isim);
         };
         sil_butonu.GestureRecognizers.Add(tap_sil);
 
-        yatay_kutu.Add(isim_etiketi, 0, 0);
+        var tarih_etiketi = new Label { Text = olay.Son_duzenleme != default ? olay.Son_duzenleme.ToString("dd.MM.yyyy") : "", TextColor = Color.FromArgb("#525252"), FontSize = 11, FontFamily = "Serif" };
+var isim_grup = new VerticalStackLayout { Spacing = 2, VerticalOptions = LayoutOptions.Center };
+isim_grup.Children.Add(isim_etiketi);
+isim_grup.Children.Add(tarih_etiketi);
+isim_grup.GestureRecognizers.Add(tap_isim);
+yatay_kutu.Add(isim_grup, 0, 0);
         yatay_kutu.Add(detay_butonu, 1, 0);
         yatay_kutu.Add(sil_butonu, 2, 0);
 

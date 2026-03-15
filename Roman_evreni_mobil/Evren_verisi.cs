@@ -10,6 +10,7 @@ public class Karakter_bilgisi
     public string Dis_gorunus { get; set; } = "";
     public string Hikaye { get; set; } = "";
     public bool Favori { get; set; } = false;
+    public DateTime Son_duzenleme { get; set; } = DateTime.Now;
 }
 
 public class Mekan_bilgisi
@@ -20,6 +21,7 @@ public class Mekan_bilgisi
     public string Hukumdar { get; set; } = "";
     public string Aciklama { get; set; } = "";
     public bool Favori { get; set; } = false;
+    public DateTime Son_duzenleme { get; set; } = DateTime.Now;
 }
 
 public class Olay_bilgisi
@@ -30,6 +32,7 @@ public class Olay_bilgisi
     public List<string> Mekan_idleri { get; set; } = new();
     public string Aciklama { get; set; } = "";
     public bool Favori { get; set; } = false;
+    public DateTime Son_duzenleme { get; set; } = DateTime.Now;
 }
 
 public class Bolum

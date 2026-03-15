@@ -99,6 +99,7 @@ public partial class Olay_detay_page : ContentPage
     private async void On_kaydet_clicked(object sender, EventArgs e)
     {
         _secili_olay.Ad = Entry_ad.Text?.Trim() ?? _secili_olay.Ad;
+        _secili_olay.Son_duzenleme = DateTime.Now;
         _secili_olay.Aciklama = Editor_aciklama.Text ?? "";
 
         var tum_evrenler = Json_motoru.Yukle();

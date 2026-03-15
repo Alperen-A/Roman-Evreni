@@ -26,6 +26,7 @@ public partial class Karakter_detay_page : ContentPage
     private async void On_kaydet_clicked(object Sender, EventArgs E)
     {
         _secili_karakter.Ad = Entry_ad.Text?.Trim() ?? _secili_karakter.Ad;
+        _secili_karakter.Son_duzenleme = DateTime.Now;
         _secili_karakter.Dis_gorunus = Entry_dis_gorunus.Text ?? "";
         _secili_karakter.Hikaye = Editor_hikaye.Text ?? "";
 

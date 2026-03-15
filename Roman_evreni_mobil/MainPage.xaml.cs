@@ -13,12 +13,19 @@ namespace Roman_evreni_mobil
         }
 
         protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            if (Aktif_evren.Mevcut != null)
-                Evren_adi_label.Text = Aktif_evren.Mevcut.Evren_adi;
-            await Ana_kutu.FadeTo(1, 300);
-        }
+{
+    base.OnAppearing();
+    if (Aktif_evren.Mevcut != null)
+    {
+        Evren_adi_label.Text = Aktif_evren.Mevcut.Evren_adi;
+        Karakter_btn.Text = $"Karakterler ({Aktif_evren.Mevcut.Karakterler.Count})";
+        Mekan_btn.Text = $"Mekanlar ({Aktif_evren.Mevcut.Mekanlar.Count})";
+        Olay_btn.Text = $"Olay orgusu ({Aktif_evren.Mevcut.Olaylar.Count})";
+        Roman_btn.Text = $"Romanlar ({Aktif_evren.Mevcut.Romanlar.Count})";
+        Not_btn.Text = $"Notlar ({Aktif_evren.Mevcut.Notlar.Count})";
+    }
+    await Ana_kutu.FadeTo(1, 300);
+}
 
         private void On_arama_degisti(object sender, TextChangedEventArgs e)
         {

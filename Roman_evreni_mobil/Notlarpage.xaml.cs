@@ -124,7 +124,12 @@ public partial class Notlarpage : ContentPage
         };
         sil_butonu.GestureRecognizers.Add(tap_sil);
 
-        yatay_kutu.Add(baslik_etiketi, 0, 0);
+        var tarih_etiketi = new Label { Text = not.Son_duzenleme != default ? not.Son_duzenleme.ToString("dd.MM.yyyy") : "", TextColor = Color.FromArgb("#525252"), FontSize = 11, FontFamily = "Serif" };
+var baslik_grup = new VerticalStackLayout { Spacing = 2, VerticalOptions = LayoutOptions.Center };
+baslik_grup.Children.Add(baslik_etiketi);
+baslik_grup.Children.Add(tarih_etiketi);
+baslik_grup.GestureRecognizers.Add(tap_isim);
+yatay_kutu.Add(baslik_grup, 0, 0);
         yatay_kutu.Add(favori_butonu, 1, 0);
         yatay_kutu.Add(detay_butonu, 2, 0);
         yatay_kutu.Add(sil_butonu, 3, 0);
