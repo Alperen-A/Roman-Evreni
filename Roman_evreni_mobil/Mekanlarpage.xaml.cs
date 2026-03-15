@@ -13,13 +13,12 @@ public partial class Mekanlarpage : ContentPage
         InitializeComponent();
         Mekanlari_yukle();
     }
-
-    protected override async void OnAppearing()
+protected override async void OnAppearing()
 {
     base.OnAppearing();
+    Mekanlari_yukle();
     await Ana_kutu.FadeTo(1, 300);
 }
-
     private void Mekanlari_yukle()
     {
         Mekan_listesi.Children.Clear();

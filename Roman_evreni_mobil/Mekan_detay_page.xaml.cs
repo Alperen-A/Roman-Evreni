@@ -27,6 +27,7 @@ public partial class Mekan_detay_page : ContentPage
 
     private async void On_kaydet_clicked(object sender, EventArgs e)
     {
+        _secili_mekan.Ad = Entry_ad.Text?.Trim() ?? _secili_mekan.Ad;
         _secili_mekan.Iklim = Entry_iklim.Text ?? "";
         _secili_mekan.Hukumdar = Entry_hukumdar.Text ?? "";
         _secili_mekan.Aciklama = Editor_aciklama.Text ?? "";
@@ -43,7 +44,7 @@ public partial class Mekan_detay_page : ContentPage
         await Navigation.PopModalAsync();
     }
 
-    private async void On_geri_clicked(object sender, EventArgs e)
+  private async void On_geri_clicked(object sender, EventArgs e)
     {
         await Navigation.PopModalAsync();
     }

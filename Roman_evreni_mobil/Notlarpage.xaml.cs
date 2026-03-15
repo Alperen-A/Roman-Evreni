@@ -14,28 +14,22 @@ public partial class Notlarpage : ContentPage
     }
 
     protected override async void OnAppearing()
-{
-    base.OnAppearing();
-    await Ana_kutu.FadeTo(1, 300);
-}
+    {
+        base.OnAppearing();
+        await Ana_kutu.FadeTo(1, 300);
+    }
 
     private void Notlari_yukle()
     {
         Not_listesi.Children.Clear();
-
         if (Aktif_evren.Mevcut?.Notlar != null)
-        {
             foreach (var not in Aktif_evren.Mevcut.Notlar)
-            {
                 Ekrana_not_ekle(not);
-            }
-        }
     }
 
     private void On_not_ekle_clicked(object sender, EventArgs e)
     {
         string? yeni_baslik = Entry_not_adi.Text?.Trim();
-
         if (!string.IsNullOrWhiteSpace(yeni_baslik) && Aktif_evren.Mevcut != null)
         {
             var yeni_not = new Not_kaydi { Baslik = yeni_baslik };
@@ -49,7 +43,6 @@ public partial class Notlarpage : ContentPage
     private void Ekrana_not_ekle(Not_kaydi not)
     {
         var dikey_kutu = new VerticalStackLayout();
-
         var yatay_kutu = new Grid
         {
             ColumnDefinitions = new ColumnDefinitionCollection
@@ -62,29 +55,21 @@ public partial class Notlarpage : ContentPage
             Padding = new Thickness(0, 15)
         };
 
-       var baslik_etiketi = new Label
-{
-    Text = not.Baslik,
-    TextColor = Color.FromArgb("#f5f5f5"),
-    FontSize = 18,
-    FontFamily = "Serif",
-    VerticalOptions = LayoutOptions.Center
-};
-var tap_isim = new TapGestureRecognizer();
-tap_isim.Tapped += async (s, e) =>
-{
-    await Navigation.PushModalAsync(new Not_detay_page(not));
-};
-baslik_etiketi.GestureRecognizers.Add(tap_isim);
+        var baslik_etiketi = new Label
+        {
+            Text = not.Baslik,
+            TextColor = Color.FromArgb("#f5f5f5"),
+            FontSize = 18,
+            FontFamily = "Serif",
+            VerticalOptions = LayoutOptions.Center
+        };
+        var tap_isim = new TapGestureRecognizer();
+        tap_isim.Tapped += async (s, e) =>
+        {
+            await Navigation.PushModalAsync(new Not_detay_page(not));
+        };
+        baslik_etiketi.GestureRecognizers.Add(tap_isim);
 
-        var tap_baslik = new TapGestureRecognizer();
-            tap_baslik.Tapped += async (s, e) =>
-            {
-        await Navigation.PushModalAsync(new Not_detay_page(not));
-            };
-            baslik_etiketi.GestureRecognizers.Add(tap_baslik);
-
-        // Favori yıldız butonu
         var favori_butonu = new Label
         {
             Text = not.Favori ? "★" : "☆",
@@ -146,7 +131,6 @@ baslik_etiketi.GestureRecognizers.Add(tap_isim);
 
         dikey_kutu.Children.Add(yatay_kutu);
         dikey_kutu.Children.Add(new BoxView { HeightRequest = 1, Color = Color.FromArgb("#171717") });
-
         Not_listesi.Children.Add(dikey_kutu);
     }
 

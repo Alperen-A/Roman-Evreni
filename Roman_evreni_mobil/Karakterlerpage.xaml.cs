@@ -14,12 +14,12 @@ public partial class Karakterlerpage : ContentPage
         Karakterleri_yukle();
     }
 
-    protected override async void OnAppearing()
+   protected override async void OnAppearing()
 {
     base.OnAppearing();
+    Karakterleri_yukle();
     await Ana_kutu.FadeTo(1, 300);
 }
-
     private void Karakterleri_yukle()
     {
         Karakter_listesi.Children.Clear();

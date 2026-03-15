@@ -14,6 +14,7 @@ public partial class Not_detay_page : ContentPage
     private Stack<string> _geri_al_stack = new();
     private Stack<string> _yeniden_yap_stack = new();
     private int _numarali_sayac = 1;
+    private bool _ilk_acilis = true;
 
     public Not_detay_page(Not_kaydi not)
     {
@@ -33,17 +34,25 @@ public partial class Not_detay_page : ContentPage
         Son_kayit_label.Text = _not.Son_duzenleme != default
             ? $"Son kayıt: {_not.Son_duzenleme:dd.MM.yyyy HH:mm}"
             : "";
-    }
-        protected override async void OnAppearing()
-        {
+    }   
+       protected override async void OnAppearing()
+{
     base.OnAppearing();
+    if (!_ilk_acilis) return;
+    _ilk_acilis = false;
+    
+    // Görünürlükleri sıfırla
+    Duzenle_scroll.IsVisible = true;
+    Onizleme_scroll.IsVisible = false;
+    Arac_cubugu_scroll.IsVisible = true;
+    
     Ana_kutu.Opacity = 0;
     Ana_kutu.TranslationY = 15;
     await Task.WhenAll(
         Ana_kutu.FadeTo(1, 500, Easing.CubicOut),
         Ana_kutu.TranslateTo(0, 0, 500, Easing.CubicOut)
     );
-        }
+}
     private void On_mod_degistir_clicked(object sender, EventArgs e)
     {
         _onizleme_modu = !_onizleme_modu;
