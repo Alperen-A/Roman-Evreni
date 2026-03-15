@@ -4,7 +4,8 @@
              x:Class="Roman_evreni_mobil.Karakter_detay_page"
              BackgroundColor="#0a0a0a">
 
-    <Grid RowDefinitions="Auto, *">
+        <Grid x:Name="Ana_kutu" Opacity="0" RowDefinitions="Auto, *">
+         <Image Grid.RowSpan="2" Source="karakter_detay_bg.jpg" Aspect="AspectFill" Opacity="0.4" /> 
         <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="20,40,20,20">
             <Label Grid.Column="0" Text="← Geri" TextColor="#737373" FontSize="16" VerticalOptions="Center">
                 <Label.GestureRecognizers>
@@ -22,17 +23,17 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="25" Padding="20,10,20,40">
                 <VerticalStackLayout Spacing="5">
-                    <Label Text="İsim" TextColor="#525252" FontSize="12" />
+                    <Label Text="İsim" TextColor="#a3a3a3" FontSize="12" />
                     <Entry x:Name="Entry_ad" BackgroundColor="Transparent" TextColor="#a3a3a3" IsEnabled="False" FontSize="18" FontFamily="Serif" />
                     <BoxView HeightRequest="1" Color="#171717" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="5">
-                    <Label Text="Dış görünüş" TextColor="#525252" FontSize="12" />
+                    <Label Text="Dış görünüş" TextColor="#a3a3a3" FontSize="12" />
                     <Entry x:Name="Entry_dis_gorunus" Placeholder="Fiziksel özellikleri..." PlaceholderColor="#262626" BackgroundColor="Transparent" TextColor="#d4d4d4" FontSize="18" FontFamily="Serif" />
                     <BoxView HeightRequest="1" Color="#171717" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="5">
-                    <Label Text="Hikaye" TextColor="#525252" FontSize="12" />
+                    <Label Text="Hikaye" TextColor="#a3a3a3" FontSize="12" />
                     <Editor x:Name="Editor_hikaye" Placeholder="Geçmişi ve amacı..." PlaceholderColor="#262626" BackgroundColor="Transparent" TextColor="#d4d4d4" FontSize="16" FontFamily="Serif" AutoSize="TextChanges" />
                     <BoxView HeightRequest="1" Color="#171717" />
                 </VerticalStackLayout>

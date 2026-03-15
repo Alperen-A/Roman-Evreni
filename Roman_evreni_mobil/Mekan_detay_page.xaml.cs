@@ -19,6 +19,12 @@ public partial class Mekan_detay_page : ContentPage
         Editor_aciklama.Text = _secili_mekan.Aciklama;
     }
 
+    protected override async void OnAppearing()
+{
+    base.OnAppearing();
+    await Ana_kutu.FadeTo(1, 300);
+}
+
     private async void On_kaydet_clicked(object sender, EventArgs e)
     {
         _secili_mekan.Iklim = Entry_iklim.Text ?? "";

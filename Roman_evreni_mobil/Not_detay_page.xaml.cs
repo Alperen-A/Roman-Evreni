@@ -34,13 +34,16 @@ public partial class Not_detay_page : ContentPage
             ? $"Son kayıt: {_not.Son_duzenleme:dd.MM.yyyy HH:mm}"
             : "";
     }
-
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        await Ana_kutu.FadeTo(1, 300);
-    }
-
+        protected override async void OnAppearing()
+        {
+    base.OnAppearing();
+    Ana_kutu.Opacity = 0;
+    Ana_kutu.TranslationY = 15;
+    await Task.WhenAll(
+        Ana_kutu.FadeTo(1, 500, Easing.CubicOut),
+        Ana_kutu.TranslateTo(0, 0, 500, Easing.CubicOut)
+    );
+        }
     private void On_mod_degistir_clicked(object sender, EventArgs e)
     {
         _onizleme_modu = !_onizleme_modu;
@@ -219,10 +222,10 @@ public partial class Not_detay_page : ContentPage
         await DisplayAlert("", "Kaydedildi ✓", "Tamam");
     }
 
-    private async void On_geri_clicked(object sender, EventArgs e)
-    {
-        Kaydet();
-        _otomatik_kayit.Stop();
-        await Navigation.PopModalAsync();
-    }
+   private async void On_geri_clicked(object sender, EventArgs e)
+{
+    Kaydet();
+    _otomatik_kayit?.Stop();
+    await Navigation.PopModalAsync();
+}
 }

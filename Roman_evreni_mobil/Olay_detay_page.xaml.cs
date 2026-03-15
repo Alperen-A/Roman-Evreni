@@ -21,6 +21,12 @@ public partial class Olay_detay_page : ContentPage
         Mekan_secimlerini_yukle();
     }
 
+    protected override async void OnAppearing()
+{
+    base.OnAppearing();
+    await Ana_kutu.FadeTo(1, 300);
+}
+
     private void Karakter_secimlerini_yukle()
     {
         Karakter_secim_kutusu.Children.Clear();

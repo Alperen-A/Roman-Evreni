@@ -18,6 +18,12 @@ public partial class Karakter_detay_page : ContentPage
         Editor_hikaye.Text = _secili_karakter.Hikaye;
     }
 
+    protected override async void OnAppearing()
+{
+    base.OnAppearing();
+    await Ana_kutu.FadeTo(1, 300);
+}
+
     private async void On_kaydet_clicked(object Sender, EventArgs E)
     {
         _secili_karakter.Dis_gorunus = Entry_dis_gorunus.Text ?? "";
