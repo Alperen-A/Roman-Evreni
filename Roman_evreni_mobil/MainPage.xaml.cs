@@ -1,4 +1,4 @@
-﻿    using System;
+    using System;
 using System.Linq;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
@@ -46,50 +46,50 @@ namespace Roman_evreni_mobil
             // Karakterler
             foreach (var k in Aktif_evren.Mevcut.Karakterler.Where(x => x.Ad.ToLower().Contains(arama)))
             {
-                Sonuc_ekle("👤 " + k.Ad, "Karakter", async () => {
-    await Navigation.PushModalAsync(new Karakterlerpage());
-    await Navigation.PushModalAsync(new Karakter_detay_page(k));
-});
+                Sonuc_ekle("👤 " + k.Ad, "Karakter", async () =>
+                {
+                    await Navigation.PushModalAsync(new Karakter_detay_page(k));
+                });
                 sonuc_var = true;
             }
 
             // Mekanlar
             foreach (var m in Aktif_evren.Mevcut.Mekanlar.Where(x => x.Ad.ToLower().Contains(arama)))
             {
-               Sonuc_ekle("🏰 " + m.Ad, "Mekan", async () => {
-    await Navigation.PushModalAsync(new Mekanlarpage());
-    await Navigation.PushModalAsync(new Mekan_detay_page(m));
-});
+               Sonuc_ekle("🏰 " + m.Ad, "Mekan", async () =>
+               {
+                   await Navigation.PushModalAsync(new Mekan_detay_page(m));
+               });
                 sonuc_var = true;
             }
 
             // Olaylar
             foreach (var o in Aktif_evren.Mevcut.Olaylar.Where(x => x.Ad.ToLower().Contains(arama)))
             {
-                Sonuc_ekle("⚡ " + o.Ad, "Olay", async () => {
-    await Navigation.PushModalAsync(new Olaylarpage());
-    await Navigation.PushModalAsync(new Olay_detay_page(o));
-});
+                Sonuc_ekle("⚡ " + o.Ad, "Olay", async () =>
+                {
+                    await Navigation.PushModalAsync(new Olay_detay_page(o));
+                });
                 sonuc_var = true;
             }
 
             // Romanlar
             foreach (var r in Aktif_evren.Mevcut.Romanlar.Where(x => x.Ad.ToLower().Contains(arama)))
             {
-                Sonuc_ekle("📖 " + r.Ad, "Roman", async () => {
-    await Navigation.PushModalAsync(new Romanlarpage());
-    await Navigation.PushModalAsync(new Roman_detay_page(r));
-});
+                Sonuc_ekle("📖 " + r.Ad, "Roman", async () =>
+                {
+                    await Navigation.PushModalAsync(new Roman_detay_page(r));
+                });
                 sonuc_var = true;
             }
 
             // Notlar
             foreach (var n in Aktif_evren.Mevcut.Notlar.Where(x => x.Baslik.ToLower().Contains(arama)))
             {
-                Sonuc_ekle("📝 " + n.Baslik, "Not", async () => {
-    await Navigation.PushModalAsync(new Notlarpage());
-    await Navigation.PushModalAsync(new Not_detay_page(n));
-});
+                Sonuc_ekle("📝 " + n.Baslik, "Not", async () =>
+                {
+                    await Navigation.PushModalAsync(new Not_detay_page(n));
+                });
                 sonuc_var = true;
             }
 

@@ -25,6 +25,16 @@ public partial class Karakter_detay_page : ContentPage
 
     private async void On_kaydet_clicked(object Sender, EventArgs E)
     {
+        await KaydetVeKapat();
+    }
+
+    private async void On_geri_clicked(object Sender, EventArgs E)
+    {
+        await KaydetVeKapat();
+    }
+
+    private async Task KaydetVeKapat()
+    {
         _secili_karakter.Ad = Entry_ad.Text?.Trim() ?? _secili_karakter.Ad;
         _secili_karakter.Son_duzenleme = DateTime.Now;
         _secili_karakter.Dis_gorunus = Entry_dis_gorunus.Text ?? "";
@@ -37,11 +47,7 @@ public partial class Karakter_detay_page : ContentPage
             Guncel_evren.Karakterler = Aktif_evren.Mevcut.Karakterler;
             Json_motoru.Kaydet(Tum_evrenler);
         }
-        await Navigation.PopModalAsync();
-    }
 
-    private async void On_geri_clicked(object Sender, EventArgs E)
-    {
         await Navigation.PopModalAsync();
     }
 }

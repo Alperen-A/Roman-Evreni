@@ -27,6 +27,16 @@ public partial class Mekan_detay_page : ContentPage
 
     private async void On_kaydet_clicked(object sender, EventArgs e)
     {
+        await KaydetVeKapat();
+    }
+
+    private async void On_geri_clicked(object sender, EventArgs e)
+    {
+        await KaydetVeKapat();
+    }
+
+    private async Task KaydetVeKapat()
+    {
         _secili_mekan.Ad = Entry_ad.Text?.Trim() ?? _secili_mekan.Ad;
         _secili_mekan.Son_duzenleme = DateTime.Now;
         _secili_mekan.Iklim = Entry_iklim.Text ?? "";
@@ -42,11 +52,6 @@ public partial class Mekan_detay_page : ContentPage
             Json_motoru.Kaydet(tum_evrenler);
         }
 
-        await Navigation.PopModalAsync();
-    }
-
-  private async void On_geri_clicked(object sender, EventArgs e)
-    {
         await Navigation.PopModalAsync();
     }
 }

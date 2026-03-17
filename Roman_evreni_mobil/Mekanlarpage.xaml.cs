@@ -110,8 +110,12 @@ protected override async void OnAppearing()
             Padding = new Thickness(10, 0, 0, 0)
         };
         var tap_sil = new TapGestureRecognizer();
-        tap_sil.Tapped += (s, e) =>
+        tap_sil.Tapped += async (s, e) =>
         {
+            bool onay = await DisplayAlert("Uyarı", $"{mekan.Ad} silinsin mi?", "Evet", "Hayır");
+            if (!onay)
+                return;
+
             Aktif_evren.Mevcut?.Mekanlar.Remove(mekan);
             var tum_evrenler = Json_motoru.Yukle();
             var guncel_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
