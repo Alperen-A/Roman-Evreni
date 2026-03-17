@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.Json;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 
@@ -16,12 +17,12 @@ public partial class Giris_sayfasi : ContentPage
     }
 
     protected override async void OnAppearing()
-{
-    base.OnAppearing();
-    Evrenleri_yukle_ve_ciz();
-    if (Main_kutu.Opacity < 1)
-        await Main_kutu.FadeTo(1, 800);
-}
+    {
+        base.OnAppearing();
+        Evrenleri_yukle_ve_ciz();
+        if (Main_kutu.Opacity < 1)
+            await Main_kutu.FadeTo(1, 800);
+    }
 
     private void Evrenleri_yukle_ve_ciz()
     {
@@ -41,7 +42,8 @@ public partial class Giris_sayfasi : ContentPage
                 ColumnDefinitions = new ColumnDefinitionCollection 
                 { 
                     new ColumnDefinition { Width = GridLength.Star }, 
-                    new ColumnDefinition { Width = GridLength.Auto } 
+                    new ColumnDefinition { Width = GridLength.Auto },
+                    new ColumnDefinition { Width = GridLength.Auto }
                 }, 
                 Padding = new Thickness(0, 15) 
             };
@@ -85,8 +87,39 @@ public partial class Giris_sayfasi : ContentPage
             };
             sil_butonu.GestureRecognizers.Add(tap_sil);
 
+            var kopyala_butonu = new Label
+            {
+                Text = "⧉",
+                TextColor = Color.FromArgb("#737373"),
+                FontSize = 18,
+                VerticalOptions = LayoutOptions.Center,
+                Padding = new Thickness(15, 0, 0, 0)
+            };
+
+            var tap_kopyala = new TapGestureRecognizer();
+            tap_kopyala.Tapped += async (s, e) =>
+            {
+                var varsayilanAd = $"{secilen_evren.Evren_adi} kopya";
+                var yeniAd = await DisplayPromptAsync("Evreni kopyala", "Yeni evren adı:", initialValue: varsayilanAd);
+                if (string.IsNullOrWhiteSpace(yeniAd))
+                    return;
+
+                var kopyaJson = JsonSerializer.Serialize(secilen_evren);
+                var kopya = JsonSerializer.Deserialize<Evren_verisi>(kopyaJson);
+                if (kopya is null)
+                    return;
+
+                kopya.Evren_adi = yeniAd.Trim();
+
+                _tum_evrenler.Add(kopya);
+                Json_motoru.Kaydet(_tum_evrenler);
+                Evrenleri_yukle_ve_ciz();
+            };
+            kopyala_butonu.GestureRecognizers.Add(tap_kopyala);
+
             yatay_kutu.Add(isim_etiketi, 0, 0);
             yatay_kutu.Add(sil_butonu, 1, 0);
+            yatay_kutu.Add(kopyala_butonu, 2, 0);
             
             dikey_kutu.Children.Add(yatay_kutu);
             dikey_kutu.Children.Add(new BoxView { HeightRequest = 1, Color = Color.FromArgb("#171717") });
