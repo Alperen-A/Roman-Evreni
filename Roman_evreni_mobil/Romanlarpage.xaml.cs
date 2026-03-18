@@ -32,21 +32,18 @@ public partial class Romanlarpage : ContentPage
         }
     }
 
-    private void On_roman_ekle_clicked(object sender, EventArgs e)
+   private void On_roman_ekle_clicked(object sender, EventArgs e)
+{
+    string? yeni_ad = Entry_roman_adi.Text?.Trim();
+    if (!string.IsNullOrWhiteSpace(yeni_ad) && Aktif_evren.Mevcut != null)
     {
-        string? yeni_ad = Entry_roman_adi.Text?.Trim();
-
-        if (!string.IsNullOrWhiteSpace(yeni_ad) && Aktif_evren.Mevcut != null)
-        {
-            var yeni_roman = new Roman { Ad = yeni_ad };
-
-            Aktif_evren.Mevcut.Romanlar.Add(yeni_roman);
-            Kaydet();
-            Ekrana_roman_ekle(yeni_roman);
-            Entry_roman_adi.Text = string.Empty;
-        }
+        var yeni_roman = new Roman { Ad = yeni_ad };
+        Aktif_evren.Mevcut.Romanlar.Add(yeni_roman);
+        Kaydet();
+        Ekrana_roman_ekle(yeni_roman);
+        Entry_roman_adi.Text = string.Empty;
     }
-
+}
     private void Ekrana_roman_ekle(Roman roman)
     {
         var dikey_kutu = new VerticalStackLayout();
