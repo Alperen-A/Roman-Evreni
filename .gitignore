@@ -3,3 +3,4 @@ obj/
 .vscode/
 Api_key.txt
 *.json
+appsettings.json
