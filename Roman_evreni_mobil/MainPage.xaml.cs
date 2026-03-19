@@ -1,4 +1,4 @@
-    using System;
+﻿    using System;
 using System.Linq;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
@@ -155,5 +155,6 @@ namespace Roman_evreni_mobil
         private async void On_romanlar_clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new Romanlarpage());
         private async void On_notlar_clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new Notlarpage());
         private async void On_asistan_clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new Yapay_zeka_page());
+        private async void On_favoriler_clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new Favorilerpage());
     }
 }  
