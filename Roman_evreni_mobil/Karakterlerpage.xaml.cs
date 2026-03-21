@@ -63,13 +63,14 @@ public partial class Karakterlerpage : ContentPage
 
         var yatay_kutu = new Grid 
         { 
-            ColumnDefinitions = new ColumnDefinitionCollection 
-            { 
-                new ColumnDefinition { Width = GridLength.Star }, 
-                new ColumnDefinition { Width = GridLength.Auto },
-                new ColumnDefinition { Width = GridLength.Auto }
-            }, 
-            Padding = new Thickness(0, 15) 
+           ColumnDefinitions = new ColumnDefinitionCollection 
+{ 
+    new ColumnDefinition { Width = GridLength.Star }, 
+    new ColumnDefinition { Width = GridLength.Auto },
+    new ColumnDefinition { Width = GridLength.Auto },
+    new ColumnDefinition { Width = GridLength.Auto }
+}, 
+Padding = new Thickness(0, 15)
         };
 
        var isim_etiketi = new Label 
@@ -134,9 +135,15 @@ var isim_grup = new VerticalStackLayout { Spacing = 2, VerticalOptions = LayoutO
 isim_grup.Children.Add(isim_etiketi);
 isim_grup.Children.Add(tarih_etiketi);
 isim_grup.GestureRecognizers.Add(tap_isim);
+var favori_butonu = new Label { Text = karakter.Favori ? "★" : "☆", TextColor = karakter.Favori ? Color.FromArgb("#f5c518") : Color.FromArgb("#737373"), FontSize = 20, VerticalOptions = LayoutOptions.Center, Padding = new Thickness(10, 0, 0, 0) };
+var tap_favori = new TapGestureRecognizer();
+tap_favori.Tapped += (s, e) => { karakter.Favori = !karakter.Favori; favori_butonu.Text = karakter.Favori ? "★" : "☆"; favori_butonu.TextColor = karakter.Favori ? Color.FromArgb("#f5c518") : Color.FromArgb("#737373"); var tum = Json_motoru.Yukle(); var guncel = tum.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi); if (guncel != null && Aktif_evren.Mevcut != null) { guncel.Karakterler = Aktif_evren.Mevcut.Karakterler; Json_motoru.Kaydet(tum); } };
+favori_butonu.GestureRecognizers.Add(tap_favori);
+
 yatay_kutu.Add(isim_grup, 0, 0);
-        yatay_kutu.Add(detay_butonu, 1, 0);
-        yatay_kutu.Add(sil_butonu, 2, 0);
+yatay_kutu.Add(favori_butonu, 1, 0);
+yatay_kutu.Add(detay_butonu, 2, 0);
+yatay_kutu.Add(sil_butonu, 3, 0);
         
         var ayrac = new BoxView { HeightRequest = 1, Color = Color.FromArgb("#171717") };
         
