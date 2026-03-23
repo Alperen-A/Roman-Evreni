@@ -112,6 +112,7 @@ isim_etiketi.GestureRecognizers.Add(tap_isim);
             Padding = new Thickness(10, 0, 0, 0)
         };
         var tap_sil = new TapGestureRecognizer();
+        
         tap_sil.Tapped += async (s, e) =>
         {
             bool onay = await DisplayAlert("Uyarı", $"{karakter.Ad} silinsin mi?", "Evet", "Hayır");
