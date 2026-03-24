@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
 
 namespace Roman_evreni_mobil;
 
@@ -20,7 +21,19 @@ public partial class Karakter_detay_page : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        Karakter_favori_label.Text = _secili_karakter.Favori ? "★" : "☆";
+        Karakter_favori_label.TextColor = _secili_karakter.Favori ? Color.FromArgb("#f5c518") : Color.FromArgb("#737373");
         await Ana_kutu.FadeTo(1, 300);
+    }
+
+    private void On_favori_clicked(object sender, EventArgs e)
+    {
+        _secili_karakter.Favori = !_secili_karakter.Favori;
+        Karakter_favori_label.Text = _secili_karakter.Favori ? "★" : "☆";
+        Karakter_favori_label.TextColor = _secili_karakter.Favori ? Color.FromArgb("#f5c518") : Color.FromArgb("#737373");
+        var tum = Json_motoru.Yukle();
+        var guncel = tum.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
+        if (guncel != null && Aktif_evren.Mevcut != null) { guncel.Karakterler = Aktif_evren.Mevcut.Karakterler; Json_motoru.Kaydet(tum); }
     }
 
     private async void On_kaydet_clicked(object Sender, EventArgs E)
