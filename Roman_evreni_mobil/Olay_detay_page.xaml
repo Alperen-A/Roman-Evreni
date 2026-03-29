@@ -4,16 +4,21 @@
              x:Class="Roman_evreni_mobil.Olay_detay_page"
              BackgroundColor="#0a0a0a">
 
-        <Grid x:Name="Ana_kutu" Opacity="0" RowDefinitions="Auto, *">
-      <Image Grid.RowSpan="2" Source="olay_detay_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
-        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="20,40,20,20">
+    <Grid x:Name="Ana_kutu" Opacity="0" RowDefinitions="Auto, *">
+        <Image Grid.RowSpan="2" Source="olay_detay_bg.jpg" Aspect="AspectFill" Opacity="0.4" />
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto, Auto" Padding="20,40,20,20">
             <Label Text="← Geri" TextColor="#f5f5f5" FontSize="16" VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="On_geri_clicked" />
                 </Label.GestureRecognizers>
             </Label>
             <Label Grid.Column="1" Text="Olay Detay" FontSize="20" FontAttributes="Bold" TextColor="#f5f5f5" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="Serif" />
-            <Label Grid.Column="2" Text="Kaydet" TextColor="#f5f5f5" FontSize="16" FontAttributes="Bold" VerticalOptions="Center">
+            <Label x:Name="Olay_favori_label" Grid.Column="2" Text="☆" FontSize="22" TextColor="#737373" VerticalOptions="Center" Padding="0,0,15,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="On_favori_clicked" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="3" Text="Kaydet" TextColor="#f5f5f5" FontSize="16" FontAttributes="Bold" VerticalOptions="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="On_kaydet_clicked" />
                 </Label.GestureRecognizers>
@@ -22,29 +27,24 @@
 
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="25" Padding="20,10,20,40">
-
                 <VerticalStackLayout Spacing="5">
                     <Label Text="Olay adı" TextColor="#a3a3a3" FontSize="12" />
                     <Entry x:Name="Entry_ad" BackgroundColor="Transparent" TextColor="#f5f5f5" FontSize="18" FontFamily="Serif" />
                     <BoxView HeightRequest="1" Color="#262626" />
                 </VerticalStackLayout>
-
                 <VerticalStackLayout Spacing="10">
                     <Label Text="İlgili karakterler" TextColor="#a3a3a3" FontSize="12" />
                     <FlexLayout x:Name="Karakter_secim_kutusu" Wrap="Wrap" Direction="Row" />
                 </VerticalStackLayout>
-
                 <VerticalStackLayout Spacing="10">
                     <Label Text="İlgili mekanlar" TextColor="#a3a3a3" FontSize="12" />
                     <FlexLayout x:Name="Mekan_secim_kutusu" Wrap="Wrap" Direction="Row" />
                 </VerticalStackLayout>
-
                 <VerticalStackLayout Spacing="5">
                     <Label Text="Açıklama" TextColor="#a3a3a3" FontSize="12" />
                     <Editor x:Name="Editor_aciklama" Placeholder="Olayın detayları..." PlaceholderColor="#525252" BackgroundColor="Transparent" TextColor="#f5f5f5" FontSize="16" FontFamily="Serif" AutoSize="TextChanges" />
                     <BoxView HeightRequest="1" Color="#262626" />
                 </VerticalStackLayout>
-
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

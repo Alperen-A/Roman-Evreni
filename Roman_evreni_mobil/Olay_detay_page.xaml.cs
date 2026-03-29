@@ -16,16 +16,27 @@ public partial class Olay_detay_page : ContentPage
         _secili_olay = olay;
         Entry_ad.Text = _secili_olay.Ad;
         Editor_aciklama.Text = _secili_olay.Aciklama;
-
         Karakter_secimlerini_yukle();
         Mekan_secimlerini_yukle();
     }
 
     protected override async void OnAppearing()
-{
-    base.OnAppearing();
-    await Ana_kutu.FadeTo(1, 300);
-}
+    {
+        base.OnAppearing();
+        Olay_favori_label.Text = _secili_olay.Favori ? "★" : "☆";
+        Olay_favori_label.TextColor = _secili_olay.Favori ? Color.FromArgb("#f5c518") : Color.FromArgb("#737373");
+        await Ana_kutu.FadeTo(1, 300);
+    }
+
+    private void On_favori_clicked(object sender, EventArgs e)
+    {
+        _secili_olay.Favori = !_secili_olay.Favori;
+        Olay_favori_label.Text = _secili_olay.Favori ? "★" : "☆";
+        Olay_favori_label.TextColor = _secili_olay.Favori ? Color.FromArgb("#f5c518") : Color.FromArgb("#737373");
+        var tum = Json_motoru.Yukle();
+        var guncel = tum.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
+        if (guncel != null && Aktif_evren.Mevcut != null) { guncel.Olaylar = Aktif_evren.Mevcut.Olaylar; Json_motoru.Kaydet(tum); }
+    }
 
     private void Karakter_secimlerini_yukle()
     {
@@ -64,7 +75,6 @@ public partial class Olay_detay_page : ContentPage
     private Border Chip_olustur(string ad, bool secili, Action<bool> degisti)
     {
         bool aktif = secili;
-
         var etiket = new Label
         {
             Text = ad,
@@ -72,7 +82,6 @@ public partial class Olay_detay_page : ContentPage
             TextColor = aktif ? Color.FromArgb("#0a0a0a") : Color.FromArgb("#f5f5f5"),
             VerticalOptions = LayoutOptions.Center
         };
-
         var chip = new Border
         {
             BackgroundColor = aktif ? Color.FromArgb("#f5f5f5") : Color.FromArgb("#1a1a1a"),
@@ -82,7 +91,6 @@ public partial class Olay_detay_page : ContentPage
             Margin = new Thickness(0, 0, 8, 8),
             Content = etiket
         };
-
         var tap = new TapGestureRecognizer();
         tap.Tapped += (s, e) =>
         {
@@ -92,7 +100,6 @@ public partial class Olay_detay_page : ContentPage
             degisti(aktif);
         };
         chip.GestureRecognizers.Add(tap);
-
         return chip;
     }
 
@@ -101,16 +108,13 @@ public partial class Olay_detay_page : ContentPage
         _secili_olay.Ad = Entry_ad.Text?.Trim() ?? _secili_olay.Ad;
         _secili_olay.Son_duzenleme = DateTime.Now;
         _secili_olay.Aciklama = Editor_aciklama.Text ?? "";
-
         var tum_evrenler = Json_motoru.Yukle();
         var guncel_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
-
         if (guncel_evren != null && Aktif_evren.Mevcut != null)
         {
             guncel_evren.Olaylar = Aktif_evren.Mevcut.Olaylar;
             Json_motoru.Kaydet(tum_evrenler);
         }
-
         await Navigation.PopModalAsync();
     }
 
