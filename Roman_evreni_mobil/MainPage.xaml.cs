@@ -2,6 +2,8 @@
 using System.Linq;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
+using System.IO;
+using System.Collections.Generic;
 
 namespace Roman_evreni_mobil
 {
@@ -146,6 +148,63 @@ namespace Roman_evreni_mobil
             Arama_sonuclari.Children.Add(satir);
             Arama_sonuclari.Children.Add(new BoxView { HeightRequest = 1, Color = Color.FromArgb("#1f1f1f") });
         }
+
+        private async void On_yedekle_clicked(object sender, EventArgs e)
+{
+    try
+    {
+        var tum_evrenler = Json_motoru.Yukle();
+        var json = System.Text.Json.JsonSerializer.Serialize(tum_evrenler, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+        
+        string dosya_adi = $"roman_evreni_yedek_{DateTime.Now:yyyyMMdd_HHmmss}.json";
+        string yol = Path.Combine(FileSystem.AppDataDirectory, dosya_adi);
+        await File.WriteAllTextAsync(yol, json);
+
+        await Share.RequestAsync(new ShareFileRequest
+        {
+            Title = "Roman Evreni Yedek",
+            File = new ShareFile(yol)
+        });
+    }
+    catch (Exception ex)
+    {
+        await DisplayAlert("Hata", ex.Message, "Tamam");
+    }
+}
+
+private async void On_geri_yukle_clicked(object sender, EventArgs e)
+{
+    try
+    {
+        var sonuc = await FilePicker.Default.PickAsync(new PickOptions
+        {
+            PickerTitle = "Yedek dosyasını seç"
+        });
+
+        if (sonuc == null) return;
+
+        using var stream = await sonuc.OpenReadAsync();
+        using var reader = new StreamReader(stream);
+        var json = await reader.ReadToEndAsync();
+
+        var evrenler = System.Text.Json.JsonSerializer.Deserialize<List<Evren_verisi>>(json);
+        if (evrenler == null || evrenler.Count == 0)
+        {
+            await DisplayAlert("Hata", "Geçersiz yedek dosyası.", "Tamam");
+            return;
+        }
+
+        bool onay = await DisplayAlert("Uyarı", $"{evrenler.Count} evren yüklenecek. Mevcut veriler silinecek. Devam edilsin mi?", "Evet", "Hayır");
+        if (!onay) return;
+
+        Json_motoru.Kaydet(evrenler);
+        await DisplayAlert("", "Yedek başarıyla geri yüklendi ✓", "Tamam");
+    }
+    catch (Exception ex)
+    {
+        await DisplayAlert("Hata", ex.Message, "Tamam");
+    }
+}
 
         private async void On_geri_clicked(object sender, EventArgs e) => await Navigation.PopModalAsync();
         private async void On_kayit_clicked(object sender, EventArgs e) => await Navigation.PushModalAsync(new Yapay_zeka_page());
