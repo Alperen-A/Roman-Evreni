@@ -60,6 +60,15 @@ public class Not_kaydi
     public DateTime Son_duzenleme { get; set; } = DateTime.Now;
 }
 
+public class Silinen_oge
+{
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string Tur { get; set; } = "";
+    public string Ad { get; set; } = "";
+    public DateTime Silinme_tarihi { get; set; } = DateTime.Now;
+    public string Veri_json { get; set; } = "";
+}
+
 public class Evren_verisi
 {
     public string Evren_adi { get; set; } = "";
@@ -68,4 +77,5 @@ public class Evren_verisi
     public List<Olay_bilgisi> Olaylar { get; set; } = new();
     public List<Roman> Romanlar { get; set; } = new();
     public List<Not_kaydi> Notlar { get; set; } = new();
+    public List<Silinen_oge> Cop_kutusu { get; set; } = new();
 }

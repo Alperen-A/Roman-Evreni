@@ -118,7 +118,14 @@ isim_etiketi.GestureRecognizers.Add(tap_isim);
             bool onay = await DisplayAlert("Uyarı", $"{karakter.Ad} silinsin mi?", "Evet", "Hayır");
             if (!onay)
                 return;
-
+                var silinen = new Silinen_oge
+{
+    Tur = "Karakter",
+    Ad = karakter.Ad,
+    Veri_json = System.Text.Json.JsonSerializer.Serialize(karakter)
+};
+Aktif_evren.Mevcut?.Cop_kutusu.Add(silinen);
+        
             Aktif_evren.Mevcut?.Karakterler.Remove(karakter);
             var tum_evrenler = Json_motoru.Yukle();
             var guncel_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);

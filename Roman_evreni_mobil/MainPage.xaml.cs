@@ -162,7 +162,7 @@ namespace Roman_evreni_mobil
 
         await Share.RequestAsync(new ShareFileRequest
         {
-            Title = "Roman Evreni Yedek",
+            Title = "Roman Evreni Dışa Aktarım",
             File = new ShareFile(yol)
         });
     }
