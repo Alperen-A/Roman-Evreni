@@ -102,6 +102,9 @@ isim_etiketi.GestureRecognizers.Add(tap_isim);
             bool onay = await DisplayAlert("Uyarı", $"{roman.Ad} silinsin mi?", "Evet", "Hayır");
             if (onay)
             {
+
+                var silinen = new Silinen_oge { Tur = "Roman", Ad = roman.Ad, Veri_json = System.Text.Json.JsonSerializer.Serialize(roman) };
+                Aktif_evren.Mevcut?.Cop_kutusu.Add(silinen);
                 Aktif_evren.Mevcut?.Romanlar.Remove(roman);
                 Kaydet();
                 Roman_listesi.Children.Remove(dikey_kutu);

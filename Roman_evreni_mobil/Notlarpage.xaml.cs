@@ -117,6 +117,9 @@ public partial class Notlarpage : ContentPage
             bool onay = await DisplayAlert("Uyarı", $"{not.Baslik} silinsin mi?", "Evet", "Hayır");
             if (onay)
             {
+
+                var silinen = new Silinen_oge { Tur = "Not", Ad = not.Baslik, Veri_json = System.Text.Json.JsonSerializer.Serialize(not) };
+                Aktif_evren.Mevcut?.Cop_kutusu.Add(silinen);
                 Aktif_evren.Mevcut?.Notlar.Remove(not);
                 Kaydet();
                 Not_listesi.Children.Remove(dikey_kutu);

@@ -115,7 +115,9 @@ new ColumnDefinition { Width = GridLength.Auto }
             bool onay = await DisplayAlert("Uyarı", $"{mekan.Ad} silinsin mi?", "Evet", "Hayır");
             if (!onay)
                 return;
-
+                
+            var silinen = new Silinen_oge { Tur = "Mekan", Ad = mekan.Ad, Veri_json = System.Text.Json.JsonSerializer.Serialize(mekan) };
+             Aktif_evren.Mevcut?.Cop_kutusu.Add(silinen);
             Aktif_evren.Mevcut?.Mekanlar.Remove(mekan);
             var tum_evrenler = Json_motoru.Yukle();
             var guncel_evren = tum_evrenler.FirstOrDefault(x => x.Evren_adi == Aktif_evren.Mevcut?.Evren_adi);
